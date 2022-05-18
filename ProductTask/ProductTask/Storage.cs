@@ -13,6 +13,12 @@ namespace ProductProject
                 return _products;
             }
         }
+
+        public Storage()
+        {
+           
+        }
+
         public Storage(params Product[] products)
         {
             _products = new List<Product>();
@@ -30,6 +36,12 @@ namespace ProductProject
                     return _products[i];
                 throw new ArgumentException();
             }
+        }
+
+        public void AddItem(Product item)
+        {
+            if (item != null)
+                _products.Add(item);
         }
 
         public bool TryToFindAllMeat()
