@@ -13,12 +13,14 @@ namespace ProductProject
 			}
 		}
 		private int price;
-		public int Price { 
+		public int Price
+		{ 
 			get 
 			{
 				return price;
 			}
-			set {
+			set
+			{
 				if (price < 0)
 				{
 					throw new ArgumentException();
@@ -27,7 +29,8 @@ namespace ProductProject
 			}
 		}
 		private double weight;
-		public double Weight { 
+		public double Weight
+		{ 
 			get 
 			{
 				return weight;
@@ -36,7 +39,7 @@ namespace ProductProject
 
 		public Product() : this(default, default, default)
 		{
-			
+
 		}
 
 		public Product(string name, int price, double weight)
