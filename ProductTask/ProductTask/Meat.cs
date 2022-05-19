@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProductProject
 {
@@ -26,7 +27,9 @@ namespace ProductProject
             }
         }
 
-		public Meat() : this(default, default, default, default, default, default)
+        private Dictionary<Category, int> additionPercentage;
+
+        public Meat() : this(default, default, default, default, default, default)
         {
 
         }
@@ -37,20 +40,17 @@ namespace ProductProject
 			this.meatCategory = meatCategory;
 			this.meatSpecies = meatSpecies;
 			timeToExpire = dateExpire;
+
+            additionPercentage = new Dictionary<Category, int>();
+            additionPercentage[Category.HighSort1] = 25;
+            additionPercentage[Category.Sort2] = 10;
+
+            ChangePrice(100); // adjusting price depending on sort
         }
+
 		public override void ChangePrice(int percentage)
 		{
-            switch (MeatCategory)
-            {
-				case Category.HighSort1:
-					percentage += 25;
-					break;
-				case Category.Sort2:
-					percentage += 10;
-					break;
-				default:
-					break;
-            }
+            percentage += additionPercentage[this.meatCategory];
 			if (IsExpired())
 			{
 				percentage = percentage > 40 ? percentage - 30 : percentage;

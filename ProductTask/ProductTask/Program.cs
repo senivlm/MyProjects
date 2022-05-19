@@ -16,5 +16,7 @@ class Program
 		double weight = double.Parse(Console.ReadLine());
 		var product = new Product(name, price, weight);
 		Console.WriteLine(product);
+		var meat = new Meat("bacon", 100, 1.2, new DateTime(2012, 1, 1), Category.HighSort1, Species.chicken);
+        Console.WriteLine(meat);
 	}
 }
