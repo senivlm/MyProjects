@@ -45,7 +45,7 @@ namespace ProductProject
             additionPercentage[Category.HighSort1] = 25;
             additionPercentage[Category.Sort2] = 10;
 
-            ChangePrice(100); // adjusting price depending on sort
+            ChangePrice(100); // врегулювання ціни в залежності від сорту
         }
 
 		public override void ChangePrice(int percentage)
