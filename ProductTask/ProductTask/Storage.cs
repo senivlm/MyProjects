@@ -16,7 +16,7 @@ namespace ProductProject
 
         public Storage()
         {
-           
+            _products = new List<Product>();
         }
 
         public Storage(params Product[] products)
@@ -41,7 +41,9 @@ namespace ProductProject
         public void AddItem(Product item)
         {
             if (item != null)
+            {
                 _products.Add(item);
+            }
         }
 
         public bool TryToFindAllMeat()
