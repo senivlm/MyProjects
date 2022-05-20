@@ -45,7 +45,7 @@ namespace ProductProject
 		public Product(string name, int price, double weight)
 		{
 			if (price < 0 || weight < 0 || name == null)
-				throw new ArgumentException();
+				throw new ArgumentException("wrong argument");
 			this.name = name;
 			this.price = price;
 			this.weight = weight;
