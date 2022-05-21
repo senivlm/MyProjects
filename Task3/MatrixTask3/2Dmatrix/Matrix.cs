@@ -24,26 +24,6 @@ namespace _2Dmatrix
             return str;
         }
 
-        public void VerticalSnake(int n1, int n2)
-        {
-            matrix = initMatrix(n1, n2);
-            int number = 0;
-            for (int i = 0; i < matrix.GetLength(1); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(0); j++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        matrix[j, i] = ++number;
-                    }
-                    else
-                    {
-                        matrix[matrix.GetLength(0) - 1 - j, i] = ++number;
-                    }
-                }
-            }
-        }
-
         private bool IsDownWay(int line, Directions direction)
         {
             if(direction == Directions.Down)
@@ -137,6 +117,27 @@ namespace _2Dmatrix
                 for (int i = matrix.GetLength(1) - 1 - j; i > j; i--)
                 {
                     matrix[j, i] = ++number;
+                }
+            }
+        }
+
+
+        public void VerticalSnake(int n1, int n2)
+        {
+            matrix = initMatrix(n1, n2);
+            int number = 0;
+            for (int i = 0; i < matrix.GetLength(1); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        matrix[j, i] = ++number;
+                    }
+                    else
+                    {
+                        matrix[matrix.GetLength(0) - 1 - j, i] = ++number;
+                    }
                 }
             }
         }
