@@ -67,13 +67,13 @@ namespace _2Dmatrix
                 }
             }
             int startPos1 = 1;
-            int startPos = line - 1;
+            int startPos2 = line - 1;
             for (int linePart2 = line - 1; linePart2 > 0; linePart2--)
             {
                 if(IsDownWay(linePart2, direction))
                 {
                     int i1 = startPos1;
-                    int j1 = startPos;
+                    int j1 = startPos2;
                     for (int i = 0; i < linePart2; i++)
                     {
                         matrix[i1, j1] = ++number;
@@ -83,7 +83,7 @@ namespace _2Dmatrix
                 }
                 else
                 {
-                    int i1 = startPos;
+                    int i1 = startPos2;
                     int j1 = startPos1;
                     for (int i = 0; i < linePart2; i++)
                     {
