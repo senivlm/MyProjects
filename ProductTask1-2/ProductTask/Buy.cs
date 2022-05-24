@@ -5,7 +5,10 @@ namespace ProductProject
 {
     public class Buy
     {
-        public int ProductsAmount { get; private set; }
+        public int ProductsAmount 
+        { 
+            get => allProducts.Count;
+        }
         public int TotalPrice { get; private set; }
         public double TotalWeight { get; private set; }
 
@@ -13,7 +16,6 @@ namespace ProductProject
 
         public Buy()
         {
-            ProductsAmount = 0;
             TotalPrice = 0;
             TotalWeight = 0;
             allProducts = new List<Product>();
@@ -21,7 +23,6 @@ namespace ProductProject
 
         public Buy(params Product[] products)
         {
-            ProductsAmount = products.Length;
             allProducts = new List<Product>();
             foreach(var item in products)
             {
@@ -30,7 +31,17 @@ namespace ProductProject
                 allProducts.Add(item);
             }
         }
-        
+
+        public Product this[int index]
+        {
+            get
+            {
+                if (index >= 0 && index < allProducts.Count)
+                    return allProducts[index];
+                throw new ArgumentException();
+            }
+        }
+
         public void AddProduct(Product product)
         {
             if (product != null)
@@ -38,7 +49,16 @@ namespace ProductProject
                 allProducts.Add(product);
                 TotalPrice += product.Price;
                 TotalWeight += product.Weight;
-                ProductsAmount += 1;
+            }
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            if (product != null && allProducts.Contains(product))
+            {
+                allProducts.Remove(product);
+                TotalPrice -= product.Price;
+                TotalWeight -= product.Weight;
             }
         }
 
@@ -51,14 +71,18 @@ namespace ProductProject
             throw new ArgumentException();
         }
 
-        public Product this[int index]
+        public override bool Equals(object obj)
         {
-            get
-            {
-                if (index >= 0 && index < allProducts.Count)
-                    return allProducts[index];
-                throw new ArgumentException();
-            }
+            return obj is Buy buy &&
+                   ProductsAmount == buy.ProductsAmount &&
+                   TotalPrice == buy.TotalPrice &&
+                   TotalWeight == buy.TotalWeight &&
+                   EqualityComparer<List<Product>>.Default.Equals(allProducts, buy.allProducts);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ProductsAmount, TotalPrice, TotalWeight, allProducts);
         }
     }
 }

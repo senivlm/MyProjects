@@ -61,7 +61,7 @@ namespace ProductProject
             return string.Format("name: {0}, price: {1}, weight: {2}", name, price, Weight);
         }
 		
-		public void Parse(string text)
+		public virtual void Parse(string text)
         {
 			if(text == null)
             {
@@ -77,6 +77,21 @@ namespace ProductProject
 			}
         }
 
-	}
+        public override bool Equals(object obj)
+        {
+            return obj is Product product &&
+                   name == product.name &&
+                   Name == product.Name &&
+                   price == product.price &&
+                   Price == product.Price &&
+                   weight == product.weight &&
+                   Weight == product.Weight;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(name, Name, price, Price, weight, Weight);
+        }
+    }
 }
 

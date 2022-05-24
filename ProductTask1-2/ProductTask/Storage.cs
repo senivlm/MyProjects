@@ -6,12 +6,10 @@ namespace ProductProject
     public class Storage
     {
         private List<Product> _products;
-        protected List<Product> products
+
+        public int ProductAmount
         {
-            get
-            {
-                return _products;
-            }
+            get => _products.Count;
         }
 
         public Storage()
@@ -46,6 +44,14 @@ namespace ProductProject
             }
         }
 
+        public void RemoveItem(Product item)
+        {
+            if (item != null)
+            {
+                _products.Remove(item);
+            }
+        }
+
         public bool TryToFindAllMeat()
         {
             bool isFound = false;
@@ -53,7 +59,6 @@ namespace ProductProject
             {
                 if(item is Meat)
                 {
-                    Console.WriteLine("Meat named {0} was found", item.Name);
                     isFound = true;
                 }
             }
@@ -67,7 +72,7 @@ namespace ProductProject
             {
                 if (item is MilkProducts)
                 {
-                    Console.WriteLine("Meat named {0} was found", item.Name);
+                    isFound = true;
                 }
             }
             return isFound;
@@ -81,13 +86,15 @@ namespace ProductProject
             }
         }
 
-        public void ShowInfo()
+        public override bool Equals(object obj)
         {
-            for (int i = 0; i < _products.Count; i++)
-            {
-                Console.WriteLine("{0} grn, {1} kg, {2} name", _products[i].Price,
-                    _products[i].Weight, _products[i].Name);
-            }
+            return obj is Storage storage &&
+                   EqualityComparer<List<Product>>.Default.Equals(_products, storage._products);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_products);
         }
     }
 }
