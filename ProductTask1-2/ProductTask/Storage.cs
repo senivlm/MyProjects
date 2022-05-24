@@ -7,7 +7,7 @@ namespace ProductProject
     {
         private List<Product> _products;
         protected List<Product> products
-        {
+        {//Порушення інкапсуляції
             get
             {
                 return _products;
@@ -80,7 +80,7 @@ namespace ProductProject
                 item.ChangePrice(percentage);
             }
         }
-
+        //Цей метод тут лишній
         public void ShowInfo()
         {
             for (int i = 0; i < _products.Count; i++)
