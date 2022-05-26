@@ -10,6 +10,10 @@ namespace Vector
         {
             get
             {
+                if(array == null)
+                {
+                    throw new NullReferenceException();
+                }
                 return array.Length;
             }
         }
