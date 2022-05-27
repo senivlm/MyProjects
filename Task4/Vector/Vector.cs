@@ -53,36 +53,31 @@ namespace Vector
 
         public void QuickSort(int fixedIndex)
         {
-            quickSort(0, array.Length - 1, fixedIndex);
+            array.Swap(fixedIndex, array.Length - 1);
+            quickSort(0, array.Length - 1);
         }
 
-        public void quickSort(int startIndex, int lastIndex, int fixedIndex)
+        private void quickSort(int start, int end)
         {
-            if (startIndex >= lastIndex)
+            if (start > end)
             {
                 return;
             }
-            int leftIndex = startIndex;
-            array.Swap(fixedIndex, lastIndex);
-            int pivotIndex = lastIndex;
-            int rightIndex = lastIndex - 1;
-            while (leftIndex != rightIndex)
+            int pivotIndex = end;
+            int leftIndex = start;
+            for (int i = start; i < end; i++)
             {
-                while (array[leftIndex] < array[pivotIndex] && leftIndex != rightIndex)
+                if (array[i] < array[pivotIndex])
                 {
+                    array.Swap(i, leftIndex);
                     leftIndex++;
                 }
-                while (array[rightIndex] > array[pivotIndex] && leftIndex != rightIndex)
-                {
-                    rightIndex--;
-                }
-                array.Swap(rightIndex, leftIndex);
             }
-            if (array[rightIndex] > array[pivotIndex])
-                array.Swap(rightIndex, pivotIndex);
-            quickSort(startIndex, leftIndex - 1, leftIndex - 1);
-            quickSort(leftIndex + 1, lastIndex, lastIndex);
+            array.Swap(leftIndex, pivotIndex);
+            quickSort(start, leftIndex - 1);
+            quickSort(leftIndex + 1, end);
         }
+
 
         public void Reverse()
         {
