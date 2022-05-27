@@ -51,13 +51,23 @@ namespace Vector
             array = new int[5];
         }
 
-        public void QuickSort(int fixedIndex)
+        public void QuickSort(Pivots pivot)
         {
-            array.Swap(fixedIndex, array.Length - 1);
-            quickSort(0, array.Length - 1);
+            switch (pivot)
+            {
+                case Pivots.FirstPivot:
+                    quickSortWithFirstPivot(0, array.Length - 1);
+                    break;
+                case Pivots.LastPivot:
+                    quickSortWithLastPivot(0, array.Length - 1);
+                    break;
+                case Pivots.MiddlePivot:
+                    quickSortWithMiddlePivot(0, array.Length - 1);
+                    break;
+            }
         }
 
-        private void quickSort(int start, int end)
+        private void quickSortWithLastPivot(int start, int end)
         {
             if (start > end)
             {
@@ -74,10 +84,66 @@ namespace Vector
                 }
             }
             array.Swap(leftIndex, pivotIndex);
-            quickSort(start, leftIndex - 1);
-            quickSort(leftIndex + 1, end);
+            quickSortWithLastPivot(start, leftIndex - 1);
+            quickSortWithLastPivot(leftIndex + 1, end);
         }
 
+        private void quickSortWithFirstPivot(int start, int end)
+        {
+            if (start > end)
+            {
+                return;
+            }
+            int pivotIndex = start;
+            int rightIndex = end;
+            for (int i = end; i > 0; i--)
+            {
+                if (array[i] > array[pivotIndex])
+                {
+                    array.Swap(i, rightIndex);
+                    rightIndex--;
+                }
+            }
+            array.Swap(rightIndex, pivotIndex);
+            quickSortWithFirstPivot(start, rightIndex - 1);
+            quickSortWithFirstPivot(rightIndex + 1, end);
+        }
+
+        private void quickSortWithMiddlePivot(int start, int end)
+        {
+            if (start >= end)
+            {
+                return;
+            }
+            int leftIndex = start;
+            int rightIndex = end;
+            int pivotIndex = start + (end - start) / 2;
+            while (leftIndex <= rightIndex)
+            {
+                while (array[leftIndex] < array[pivotIndex])
+                {
+                    leftIndex++;
+                }
+                while (array[rightIndex] > array[pivotIndex])
+                {
+                    rightIndex--;
+                }
+                if (leftIndex <= rightIndex)
+                {
+                    array.Swap(leftIndex, rightIndex);
+                    leftIndex++;
+                    rightIndex--;
+                }
+            }
+            if (start < rightIndex)
+            {
+                quickSortWithMiddlePivot(start, rightIndex);
+            }
+            if (leftIndex < end)
+            {
+                quickSortWithMiddlePivot(leftIndex, end);
+            }
+        }
 
         public void Reverse()
         {
