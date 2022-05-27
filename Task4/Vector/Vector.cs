@@ -117,7 +117,7 @@ namespace Vector
             }
             int leftIndex = start;
             int rightIndex = end;
-            int pivotIndex = start + (end - start) / 2;
+            int pivotIndex = (end + start) / 2;
             while (leftIndex <= rightIndex)
             {
                 while (array[leftIndex] < array[pivotIndex])
