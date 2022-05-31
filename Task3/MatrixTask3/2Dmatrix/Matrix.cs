@@ -69,7 +69,7 @@ namespace _2Dmatrix
             int startPos1 = 1;
             int startPos2 = line - 1;
             for (int linePart2 = line - 1; linePart2 > 0; linePart2--)
-            {
+            {// по обох вітках є повтор коду. Його можна винести після if
                 if(IsDownWay(linePart2, direction))
                 {
                     int i1 = startPos1;
@@ -141,7 +141,7 @@ namespace _2Dmatrix
                 }
             }
         }
-
+// не бачу користі в такому методі
         private int[,] initMatrix(int n1, int n2)
         {
             return new int[n1, n2];
