@@ -6,7 +6,7 @@ namespace Vector
 {
     class Vector
     {
-        public int[] array;
+        private int[] array;
 
         public int GetLenght
         {
