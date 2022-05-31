@@ -46,9 +46,9 @@ namespace Vector
             array = new int[n];
         }
 
-        public Vector()
+        public Vector() : this(5)
         {
-            array = new int[5];
+
         }
 
         public void QuickSort(Pivots pivot)
