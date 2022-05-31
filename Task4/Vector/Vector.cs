@@ -87,7 +87,7 @@ namespace Vector
             quickSortWithLastPivot(start, leftIndex - 1);
             quickSortWithLastPivot(leftIndex + 1, end);
         }
-
+// можна писати один метод для різних стратегій вибору оорного елемента
         private void quickSortWithFirstPivot(int start, int end)
         {
             if (start > end)
@@ -194,7 +194,7 @@ namespace Vector
         }
 
         public bool IsPalindromas() 
-        {
+        {//Можна використовувати кортеж
             int halfSize = array.Length / 2;
             bool isPalindromas = true;
             for (int i = 0; i < halfSize; i++)
