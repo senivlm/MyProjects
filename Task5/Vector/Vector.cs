@@ -48,7 +48,12 @@ namespace Vector
             array = new int[n];
         }
 
-        public void readFromFileInto2Arrays(string filePath, out int[] leftHalf, out int[] rightHalf)
+        public Vector() : this(5)
+        {
+
+        }
+
+        private void readFromFileInto2Arrays(string filePath, out int[] leftHalf, out int[] rightHalf)
         {
             StreamReader sr = new StreamReader(filePath);
             string[] arr = sr.ReadToEnd().Split(" ");
@@ -65,7 +70,7 @@ namespace Vector
             sr.Close();
         }
 
-        private void ReadFromFileToArray(string path)
+        public void CopyFromFileToArray(string path)
         {
             StreamReader sr = new StreamReader(path);
             string[] arrStr = sr.ReadLine().ToString().Split(" ");
@@ -79,18 +84,13 @@ namespace Vector
             }
         }
 
-        public Vector()
-        {
-            array = new int[5];
-        }
-
         public void MergeSort(string pathOfFile = @"Test.txt")
         {
             // array must be pre-written in file
             try
             {
                 mergeSort(pathOfFile, true); // sort and write sorted array to file txt
-                ReadFromFileToArray(pathOfFile); // paste sorted array from txt to this.array
+                CopyFromFileToArray(pathOfFile); // paste sorted array from txt to this.array
             }
             catch(Exception ex)
             {
