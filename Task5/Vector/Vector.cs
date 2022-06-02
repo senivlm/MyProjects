@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Vector
@@ -12,7 +11,7 @@ namespace Vector
         {
             get
             {
-                if(array == null)
+                if (array == null)
                 {
                     throw new NullReferenceException();
                 }
@@ -22,8 +21,8 @@ namespace Vector
         public int this[int index]
         {
             get
-            { 
-                if(index >= 0 && index < array.Length)
+            {
+                if (index >= 0 && index < array.Length)
                 {
                     return array[index];
                 }
@@ -32,7 +31,7 @@ namespace Vector
                     throw new Exception("Index out of range array");
                 }
             }
-            set 
+            set
             {
                 array[index] = value;
             }
@@ -55,44 +54,67 @@ namespace Vector
 
         private void readFromFileInto2Arrays(string filePath, out int[] leftHalf, out int[] rightHalf)
         {
-            StreamReader sr = new StreamReader(filePath);
-            string[] arr = sr.ReadToEnd().Split(" ");
-            leftHalf = new int[arr.Length / 2];
-            rightHalf = new int[arr.Length - arr.Length / 2];
-            for (int i = 0; i < leftHalf.Length; i++)
+            int lenght = 0;
+            using (StreamReader sr = new StreamReader(filePath))
             {
-                leftHalf[i] = Convert.ToInt32(arr[i]);
-            }
-            for (int i = leftHalf.Length; i < arr.Length; i++)
-            {
-                rightHalf[i - leftHalf.Length] = Convert.ToInt32(arr[i]); 
-            }
-            sr.Close();
-        }
-
-        public void CopyFromFileToArray(string path)
-        {
-            StreamReader sr = new StreamReader(path);
-            string[] arrStr = sr.ReadLine().ToString().Split(" ");
-            arrStr = sr.ReadLine().ToString().Split(" ");
-            for (int i = 0; i < arrStr.Length; i++)
-            {
-                if (arrStr[i] != "")
+                while (!sr.EndOfStream)
                 {
-                    array[i] = Convert.ToInt32(arrStr[i]);
+                    while (char.IsDigit(Convert.ToChar(sr.Read())) && !sr.EndOfStream)
+                    {
+                    }
+                    lenght++;
                 }
             }
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                int i = 0;
+                leftHalf = new int[lenght / 2];
+                rightHalf = new int[lenght - lenght / 2];
+                while (!sr.EndOfStream)
+                {
+                    int multiplier = 1;
+                    int number = 0;
+                    char c = Convert.ToChar(sr.Read());
+
+                    while (char.IsDigit(c) && !sr.EndOfStream)
+                    {
+                        number = (c - '0') + (number * multiplier);
+                        multiplier = 10;
+                        if (!sr.EndOfStream)
+                            c = Convert.ToChar(sr.Read());
+                    }
+                    if (sr.EndOfStream)
+                    {
+                        number = (c - '0') + (number * multiplier);
+                    }
+                    if (i < leftHalf.Length)
+                    {
+                        leftHalf[i] = number;
+                    }
+                    else
+                    {
+                        if (i < rightHalf.Length)
+                            i++;
+                        rightHalf[i - rightHalf.Length] = number;
+                    }
+                    i++;
+                }
+
+            }
         }
 
-        public void MergeSort(string pathOfFile = @"Test.txt")
+        public void MergeSortInTxtFile(string pathOfFile = @"Test.txt")
         {
             // array must be pre-written in file
             try
             {
                 mergeSort(pathOfFile, true); // sort and write sorted array to file txt
-                CopyFromFileToArray(pathOfFile); // paste sorted array from txt to this.array
             }
-            catch(Exception ex)
+            catch(FileNotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (IOException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -130,7 +152,7 @@ namespace Vector
             }
 
             mergeSort(path, false, leftHalf);
-            mergeSort(path,  false, rightHalf);
+            mergeSort(path, false, rightHalf);
 
             merge(array, leftHalf, rightHalf, path);
         }
@@ -228,7 +250,7 @@ namespace Vector
         private void moveTreeToLargest(int n, int i)
         {
             int largest = i;
-            int leftBucket = 2 * i + 1; 
+            int leftBucket = 2 * i + 1;
             int rightBucket = 2 * i + 2;
 
             if (leftBucket < n && array[leftBucket] > array[largest])
@@ -362,7 +384,7 @@ namespace Vector
             for (int i = 0; i < array.Length; i++)
             {
                 int number = random.Next(0, array.Length + 1);
-                while(Array.IndexOf(array, number) != -1)
+                while (Array.IndexOf(array, number) != -1)
                 {
                     number = random.Next(0, array.Length + 1);
                 }
@@ -383,7 +405,7 @@ namespace Vector
                 {
                     sequenceCount++;
                 }
-                if(sequenceCount > maxSequenceCount)
+                if (sequenceCount > maxSequenceCount)
                 {
                     maxSequenceCount = sequenceCount;
                     maxIndex = index;
@@ -393,13 +415,13 @@ namespace Vector
             return new SequenceInfo(maxIndex, number, maxSequenceCount);
         }
 
-        public bool IsPalindromas() 
+        public bool IsPalindromas()
         {
             int halfSize = array.Length / 2;
             bool isPalindromas = true;
             for (int i = 0; i < halfSize; i++)
             {
-                if(array[i] != array[array.Length - 1 - i])
+                if (array[i] != array[array.Length - 1 - i])
                 {
                     isPalindromas = false;
                 }
@@ -418,12 +440,12 @@ namespace Vector
 
         public Pair[] CalculateFrequence()
         {
-            
+
             Pair[] pairs = new Pair[array.Length];
 
             for (int i = 0; i < array.Length; i++)
             {
-                pairs[i] = new Pair(0,0);
+                pairs[i] = new Pair(0, 0);
 
             }
             int countDifference = 0;
@@ -433,7 +455,7 @@ namespace Vector
                 bool isElement = false;
                 for (int j = 0; j < countDifference; j++)
                 {
-                    if(array[i] == pairs[j].Number)
+                    if (array[i] == pairs[j].Number)
                     {
                         pairs[j].Freq++;
                         isElement = true;
