@@ -159,74 +159,85 @@ namespace Vector
 
         private void merge(int[] array, int[] leftHalf, int[] rightHalf, string path)
         {
-            int i = 0, j = 0, k = 0;
             if (array.Length == this.array.Length)
             {
-                StreamWriter sw = new StreamWriter(path, true);
-                sw.WriteLine();
-                while (i < leftHalf.Length && j < rightHalf.Length)
-                {
-                    if (leftHalf[i] <= rightHalf[j])
-                    {
-                        sw.Write(leftHalf[i]);
-                        i++;
-                    }
-                    else
-                    {
-                        sw.Write(rightHalf[j]);
-                        j++;
-                    }
-                    k++;
-                    sw.Write(" ");
-                }
-
-                while (i < leftHalf.Length)
-                {
-                    sw.Write(leftHalf[i]);
-                    i++;
-                    k++;
-                    sw.Write(" ");
-                }
-
-                while (j < rightHalf.Length)
-                {
-                    sw.Write(rightHalf[j]);
-                    j++;
-                    k++;
-                    sw.Write(" ");
-                }
-                sw.Close();
+                putArrayInFile(leftHalf, rightHalf, path);
             }
             else
             {
-                while (i < leftHalf.Length && j < rightHalf.Length)
-                {
-                    if (leftHalf[i] <= rightHalf[j])
-                    {
-                        array[k] = leftHalf[i];
-                        i++;
-                    }
-                    else
-                    {
-                        array[k] = rightHalf[j];
-                        j++;
-                    }
-                    k++;
-                }
+                mergeInArray(array, leftHalf, rightHalf, path);
+            }
+        }
 
-                while (i < leftHalf.Length)
+        private void putArrayInFile(int[] leftHalf, int[] rightHalf, string path)
+        {
+            int i = 0, j = 0, k = 0;
+            StreamWriter sw = new StreamWriter(path, true);
+            sw.WriteLine();
+            while (i < leftHalf.Length && j < rightHalf.Length)
+            {
+                if (leftHalf[i] <= rightHalf[j])
+                {
+                    sw.Write(leftHalf[i]);
+                    i++;
+                }
+                else
+                {
+                    sw.Write(rightHalf[j]);
+                    j++;
+                }
+                k++;
+                sw.Write(" ");
+            }
+
+            while (i < leftHalf.Length)
+            {
+                sw.Write(leftHalf[i]);
+                i++;
+                k++;
+                sw.Write(" ");
+            }
+
+            while (j < rightHalf.Length)
+            {
+                sw.Write(rightHalf[j]);
+                j++;
+                k++;
+                sw.Write(" ");
+            }
+            sw.Close();
+        }
+
+        private void mergeInArray(int[] array, int[] leftHalf, int[] rightHalf, string path)
+        {
+            int i = 0, j = 0, k = 0;
+            while (i < leftHalf.Length && j < rightHalf.Length)
+            {
+                if (leftHalf[i] <= rightHalf[j])
                 {
                     array[k] = leftHalf[i];
                     i++;
-                    k++;
                 }
-
-                while (j < rightHalf.Length)
+                else
                 {
                     array[k] = rightHalf[j];
                     j++;
-                    k++;
                 }
+                k++;
+            }
+
+            while (i < leftHalf.Length)
+            {
+                array[k] = leftHalf[i];
+                i++;
+                k++;
+            }
+
+            while (j < rightHalf.Length)
+            {
+                array[k] = rightHalf[j];
+                j++;
+                k++;
             }
         }
 
