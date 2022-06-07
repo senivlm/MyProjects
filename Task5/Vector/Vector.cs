@@ -393,7 +393,7 @@ namespace Vector
         {
             Random random = new Random();
             for (int i = 0; i < array.Length; i++)
-            {
+            {// при великих значеннях розміру масиву такий підхід буде неефективний.
                 int number = random.Next(0, array.Length + 1);
                 while (Array.IndexOf(array, number) != -1)
                 {
