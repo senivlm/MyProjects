@@ -66,7 +66,7 @@ namespace Vector
                     break;
             }
         }
-
+// краще було організувати один метод з параметром, який задає індекс опорного елемента. Повтор коду - це завжди проюлема.
         private void quickSortWithLastPivot(int start, int end)
         {
             if (start > end)
