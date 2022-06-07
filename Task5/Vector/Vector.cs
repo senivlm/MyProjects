@@ -110,6 +110,7 @@ namespace Vector
             {
                 mergeSort(pathOfFile, true); // sort and write sorted array to file txt
             }
+            // Прив'Язка до консольного друку тут лишня. Це файл моделі. Краще підняти виняток на рівень вгору. тобто повторно згенерувати його.
             catch(FileNotFoundException ex)
             {
                 Console.WriteLine(ex);
@@ -119,14 +120,14 @@ namespace Vector
                 Console.WriteLine(ex);
             }
         }
-
+// 
         private void mergeSort(string path, bool firstTime, int[] array = null)
         {
             if (array != null && array.Length < 2)
             {
                 return;
             }
-
+// При файловому сортуванні цей варіант не пройде. Можна мати тільки один з масивчиків. На решту не вистачає оперативки.
             int[] leftHalf;
             int[] rightHalf;
             if (firstTime)
