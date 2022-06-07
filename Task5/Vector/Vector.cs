@@ -4,7 +4,7 @@ using System.IO;
 namespace Vector
 {
     class Vector
-    {
+    {// ваш номер 39
         private int[] array;
 
         public int GetLenght
