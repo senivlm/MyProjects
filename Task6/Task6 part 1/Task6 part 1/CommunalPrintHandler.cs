@@ -80,15 +80,15 @@ namespace Task6_part_1
                 string[] months = convertQuarterToMonth(quarter);
                 sw.WriteLine();
                 sw.WriteLine("Amount of apartments: {0}, quarter: {1}", flatAmount, quarter);
-                sw.WriteLine($"Owner{new string(' ', tabulation - 5)}{months[0]}{new string(' ', tabulation - months[0].Length)}" +
-                    $"{months[1]}{new string(' ', tabulation - months[1].Length)}{months[2]}{new string(' ', tabulation - months[2].Length)}Cost (UAH)");
+                sw.WriteLine($"Owner{computeTabulation("Owner")}{months[0]}{computeTabulation(months[0])}" +
+                    $"{months[1]}{new string(' ', tabulation - months[1].Length)}{months[2]}{computeTabulation(months[2])}Cost (UAH)");
                 foreach (var item in flatsInfo)
                 {
-                    sw.Write($"{item.Value[0].PayerName}{new string(' ', tabulation - item.Value[0].PayerName.Length)}");
+                    sw.Write($"{item.Value[0].PayerName}{computeTabulation(item.Value[0].PayerName)}");
                     sw.Write($"{item.Value[0].IncomingCounter}" +
-                        $"{new string(' ', tabulation - Convert.ToString(item.Value[0].IncomingCounter).Length)}{item.Value[1].IncomingCounter}" +
-                        $"{new string(' ', tabulation - Convert.ToString(item.Value[1].IncomingCounter).Length)}{item.Value[2].IncomingCounter}" +
-                        $"{new string(' ', tabulation - Convert.ToString(item.Value[2].IncomingCounter).Length)}{findPrice(item.Value)}");
+                        $"{computeTabulation(item.Value[0].IncomingCounter)}{item.Value[1].IncomingCounter}" +
+                        $"{computeTabulation(item.Value[1].IncomingCounter)}{item.Value[2].IncomingCounter}" +
+                        $"{computeTabulation(item.Value[2].IncomingCounter)}{findPrice(item.Value)}");
                     sw.WriteLine();
                 }
             }
@@ -105,7 +105,7 @@ namespace Task6_part_1
             {
                 price += flat[i].IncomingCounter;
             }
-            return price;
+            return price * (int)PriceForElectricity;
         }
 
         public static void WriteOneFlatInfoInFile(int appartmentNumber)
@@ -114,16 +114,21 @@ namespace Task6_part_1
             {
                 sw.WriteLine();
                 string[] months = convertQuarterToMonth(quarter);
-                sw.WriteLine($"Owner{new string(' ', tabulation - 5)}{months[0]}{new string(' ', tabulation - months[0].Length)}" +
-                   $"{months[1]}{new string(' ', tabulation - months[1].Length)}{months[2]}{new string(' ', tabulation - months[2].Length)}Cost (UAH)");
-                sw.Write($"{flatsInfo[appartmentNumber][0].PayerName}{new string(' ', tabulation - flatsInfo[appartmentNumber][0].PayerName.Length)}");
+                sw.WriteLine($"Owner{computeTabulation("owner")}{months[0]}{computeTabulation(months[0])}" +
+                   $"{months[1]}{computeTabulation(months[1])}{months[2]}{computeTabulation(months[2])}Cost (UAH)");
+                sw.Write($"{flatsInfo[appartmentNumber][0].PayerName}{computeTabulation(flatsInfo[appartmentNumber][0].PayerName)}");
                 sw.Write($"{flatsInfo[appartmentNumber][0].IncomingCounter}" +
-                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][0].IncomingCounter).Length)}{flatsInfo[appartmentNumber][1].IncomingCounter}" +
-                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][1].IncomingCounter).Length)}{flatsInfo[appartmentNumber][2].IncomingCounter}" +
-                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][2].IncomingCounter).Length)}{findPrice(flatsInfo[appartmentNumber])}");
+                    $"{computeTabulation(flatsInfo[appartmentNumber][0].IncomingCounter)}{flatsInfo[appartmentNumber][1].IncomingCounter}" +
+                    $"{computeTabulation(flatsInfo[appartmentNumber][1].IncomingCounter)}{flatsInfo[appartmentNumber][2].IncomingCounter}" +
+                    $"{computeTabulation(flatsInfo[appartmentNumber][2].IncomingCounter)}{findPrice(flatsInfo[appartmentNumber])}");
                 sw.WriteLine();
                 sw.WriteLine();
             }
+        }
+
+        private static string computeTabulation(object obj)
+        {
+            return new string(' ', tabulation - Convert.ToString(obj).Length);
         }
 
         public static string FindNameWithLargestDebt()
@@ -167,7 +172,7 @@ namespace Task6_part_1
             int i = 0;
             foreach (var item in flatsInfo)
             {
-                allPricesForFlats[i] += string.Format("Price for flat n{0}: {1} UAH", item.Key, findPrice(item.Value) * PriceForElectricity);
+                allPricesForFlats[i] = string.Format("Price for flat n{0}: {1} UAH", item.Key, findPrice(item.Value));
                 i++;
             }
             return allPricesForFlats;
