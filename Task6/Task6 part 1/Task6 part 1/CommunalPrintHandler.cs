@@ -113,6 +113,16 @@ namespace Task6_part_1
             using (var sw = new StreamWriter(currentPath, true))
             {
                 sw.WriteLine();
+                string[] months = convertQuarterToMonth(quarter);
+                sw.WriteLine($"Owner{new string(' ', tabulation - 5)}{months[0]}{new string(' ', tabulation - months[0].Length)}" +
+                   $"{months[1]}{new string(' ', tabulation - months[1].Length)}{months[2]}{new string(' ', tabulation - months[2].Length)}Cost (UAH)");
+                sw.Write($"{flatsInfo[appartmentNumber][0].PayerName}{new string(' ', tabulation - flatsInfo[appartmentNumber][0].PayerName.Length)}");
+                sw.Write($"{flatsInfo[appartmentNumber][0].IncomingCounter}" +
+                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][0].IncomingCounter).Length)}{flatsInfo[appartmentNumber][1].IncomingCounter}" +
+                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][1].IncomingCounter).Length)}{flatsInfo[appartmentNumber][2].IncomingCounter}" +
+                    $"{new string(' ', tabulation - Convert.ToString(flatsInfo[appartmentNumber][2].IncomingCounter).Length)}{findPrice(flatsInfo[appartmentNumber])}");
+                sw.WriteLine();
+                sw.WriteLine();
             }
         }
 

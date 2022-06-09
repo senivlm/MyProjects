@@ -4,6 +4,7 @@
 43 Maxim 4123 154 0045576 01.24.2021 02.24.2021 03.24.2021 
 12 Petro 0 0 0 01.27.2021 02.24.2021 2.24.2021
 
+
 Amount of apartments: 4, quarter: 2
 Owner      April      May        June       Cost (UAH)
 Tolmachov  123        576        124        823
@@ -15,6 +16,9 @@ Price for flat n4: 1382.64 UAH
 Price for flat n41: 1433.0399 UAH
 Price for flat n43: 83753.04 UAH
 Price for flat n12: 0 UAH
+
+Owner      April      May        June       Cost (UAH)
+Ivan       123        576        154        853
 
 Name with largest debt:Maxim
 Number flat with no consuming: 12
