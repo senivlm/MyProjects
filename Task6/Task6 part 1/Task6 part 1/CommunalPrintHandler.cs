@@ -8,18 +8,19 @@ namespace Task6_part_1
     {
         private static int flatAmount;
         private static int quarter;
-        private static Dictionary<int, FlatInfo> flatsInfo;
+        private static Dictionary<int, FlatInfoMonth[]> flatsInfo;
         public static readonly float PriceForElectricity = 1.68f;
-        public static string currnetPath { get; private set; }
+        private static int tabulation = 3;
+        public static string currentPath { get; private set; }
 
         public static void ReadAccountingElectricty(string path)
         {
-            flatsInfo = new Dictionary<int, FlatInfo>();
+            flatsInfo = new Dictionary<int, FlatInfoMonth[]>();
             try
             {
                 using (var sr = new StreamReader(path))
                 {
-                    currnetPath = path;
+                    currentPath = path;
                     string[] firstLineData = sr.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
                     if (!int.TryParse(firstLineData[0], out flatAmount))
                     {
@@ -42,7 +43,15 @@ namespace Task6_part_1
                         {
                             throw new FormatException("Invalid number of flat");
                         }
-                        flatsInfo[number] = new FlatInfo(flatData[1], int.Parse(flatData[2]), int.Parse(flatData[3]), DateTime.Parse(flatData[4]), number);
+                        flatsInfo[number] = new FlatInfoMonth[3];
+                        if(flatData[1].Length > tabulation)
+                        {
+                            tabulation = flatData[1].Length + 2;
+                        }
+                        for (int j = 1; j <= 3; j++)
+                        {
+                            flatsInfo[number][j - 1] = new FlatInfoMonth(flatData[1], int.Parse(flatData[j+1]), DateTime.Parse(flatData[j+4]));
+                        }
                     }
                 }
             }
@@ -66,59 +75,80 @@ namespace Task6_part_1
 
         public static void WriteInfoFlatsInFile()
         {
-            using (var sw = new StreamWriter(currnetPath, true))
+            using (var sw = new StreamWriter(currentPath, true))
             {
-                sw.WriteLine();
+                string[] months = convertQuarterToMonth(quarter);
                 sw.WriteLine();
                 sw.WriteLine("Amount of apartments: {0}, quarter: {1}", flatAmount, quarter);
+                sw.WriteLine($"Owner{new string(' ', tabulation - 5)}{months[0]}{new string(' ', tabulation - months[0].Length)}" +
+                    $"{months[1]}{new string(' ', tabulation - months[1].Length)}{months[2]}{new string(' ', tabulation - months[2].Length)}Cost (UAH)");
                 foreach (var item in flatsInfo)
                 {
-                    sw.WriteLine(item);
+                    sw.Write($"{item.Value[0].PayerName}{new string(' ', tabulation - item.Value[0].PayerName.Length)}");
+                    sw.Write($"{item.Value[0].IncomingCounter}" +
+                        $"{new string(' ', tabulation - Convert.ToString(item.Value[0].IncomingCounter).Length)}{item.Value[1].IncomingCounter}" +
+                        $"{new string(' ', tabulation - Convert.ToString(item.Value[1].IncomingCounter).Length)}{item.Value[2].IncomingCounter}" +
+                        $"{new string(' ', tabulation - Convert.ToString(item.Value[2].IncomingCounter).Length)}{findPrice(item.Value)}");
+                    sw.WriteLine();
                 }
             }
         }
 
+        private static int findPrice(FlatInfoMonth[] flat)
+        {
+            if(flat == null)
+            {
+                return -1;
+            }
+            int price = 0;
+            for (int i = 0; i < flat.Length; i++)
+            {
+                price += flat[i].IncomingCounter;
+            }
+            return price;
+        }
+
         public static void WriteOneFlatInfoInFile(int appartmentNumber)
         {
-            using (var sw = new StreamWriter(currnetPath, true))
+            using (var sw = new StreamWriter(currentPath, true))
             {
                 sw.WriteLine();
-                sw.WriteLine(flatsInfo[appartmentNumber]);
             }
         }
 
         public static string FindNameWithLargestDebt()
         {
-            FlatInfo flat = null;
-            using (var sw = new StreamWriter(currnetPath, true))
+            FlatInfoMonth flat = null;
+            using (var sw = new StreamWriter(currentPath, true))
             {
                 int maxConsumed = int.MinValue;
                 foreach (var item in flatsInfo)
                 {
-                    if (item.Value.IncomingCounter > maxConsumed)
+                    int price = findPrice(item.Value);
+                    if (price > maxConsumed)
                     {
-                        flat = item.Value;
-                        maxConsumed = item.Value.IncomingCounter;
+                        flat = item.Value[0];
+                        maxConsumed = price;
                     }
                 }
             }
-            return flat == null ? "no data" : flat.OwnerName;
+            return flat == null ? "no data" : flat.PayerName;
         }
 
         public static int FindNumberFlatWithNoConsuming()
         {
-            FlatInfo flat = null;
-            using (var sw = new StreamWriter(currnetPath, true))
+            int number = -1;
+            using (var sw = new StreamWriter(currentPath, true))
             {
                 foreach (var item in flatsInfo)
                 {
-                    if (item.Value.IncomingCounter == 0)
+                    if (findPrice(item.Value) == 0)
                     {
-                        flat = item.Value;
+                        number = item.Key;
                     }
                 }
             }
-            return flat == null ? -1 : flat.Number;
+            return number;
         }
 
         public static string[] DefinePricesForIncomingCounters()
@@ -127,34 +157,34 @@ namespace Task6_part_1
             int i = 0;
             foreach (var item in flatsInfo)
             {
-                allPricesForFlats[i] += string.Format("Price for flat n{0}: {1} grn", item.Key, item.Value.IncomingCounter * PriceForElectricity);
+                allPricesForFlats[i] += string.Format("Price for flat n{0}: {1} UAH", item.Key, findPrice(item.Value) * PriceForElectricity);
                 i++;
             }
             return allPricesForFlats;
         }
 
-        public static int FindLastDaysFromLastTakenInfo(int numberAppart)
+        public static int FindLastDaysFromLastTakenInfo(int numberAppart, int monthsNumber)
         {
-            if (DateTime.Now.DayOfYear > flatsInfo[numberAppart].Date.DayOfYear)
+            if (DateTime.Now.DayOfYear > flatsInfo[numberAppart][monthsNumber - 1].Date.DayOfYear)
             {
-                return DateTime.Now.DayOfYear - flatsInfo[numberAppart].Date.DayOfYear;
+                return DateTime.Now.DayOfYear - flatsInfo[numberAppart][monthsNumber - 1].Date.DayOfYear;
             }
             else
             {
-                return flatsInfo[numberAppart].Date.DayOfYear - DateTime.Now.DayOfYear;
+                return flatsInfo[numberAppart][monthsNumber - 1].Date.DayOfYear - DateTime.Now.DayOfYear;
             }
         }
 
         public static void PrintSomethingInFile(string someText)
         {
-            using (var sw = new StreamWriter(currnetPath, true))
+            using (var sw = new StreamWriter(currentPath, true))
             {
                 sw.WriteLine(someText);
             }
         }
         public static void PrintSomethingInFile(string[] someText)
         {
-            using (var sw = new StreamWriter(currnetPath, true))
+            using (var sw = new StreamWriter(currentPath, true))
             {
                 sw.WriteLine();
                 foreach (var txt in someText)
@@ -162,6 +192,75 @@ namespace Task6_part_1
                     sw.WriteLine(txt);
                 }
             }
+        }
+
+        private static string[] convertQuarterToMonth(int quarter)
+        {
+            string[] months = null;
+            switch (quarter)
+            {
+                case 1:
+                    months = new string[3] { "January", "February", "March" };
+                    break;
+                case 2:
+                    months = new string[3] { "April", "May", "June"};
+                    break;
+                case 3:
+                    months = new string[3] { "July", "August", "September" };
+                    break;
+                case 4:
+                    months = new string[3] { "October", "November", "December" };
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+            return months;
+        }
+
+        public static string ConvertToFullData(DateTime date)
+        {
+            string fullData = date.Day + " ";
+            switch (date.Month)
+            {
+                case 1:
+                    fullData += "January ";
+                    break;
+                case 2:
+                    fullData += "February ";
+                    break;
+                case 3:
+                    fullData += "March ";
+                    break;
+                case 4:
+                    fullData += "April ";
+                    break;
+                case 5:
+                    fullData += "May ";
+                    break;
+                case 6:
+                    fullData += "June ";
+                    break;
+                case 7:
+                    fullData += "July ";
+                    break;
+                case 8:
+                    fullData += "August ";
+                    break;
+                case 9:
+                    fullData += "September ";
+                    break;
+                case 10:
+                    fullData += "October ";
+                    break;
+                case 11:
+                    fullData += "November ";
+                    break;
+                case 12:
+                    fullData += "December ";
+                    break;
+            }
+            fullData += date.Year;
+            return fullData;
         }
     }
 }

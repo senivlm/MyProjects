@@ -1,22 +1,21 @@
 ﻿4 2
-4 Tolmachov 123 576 05.25.2021
-41 Ivan 123 576 08.22.2021
-43 Maxim 4123 0045576 08.05.2021
-12 Petro 0 0 08.04.2021
-
+4 Tolmachov 123 576 124 01.25.2021 02.24.2021 03.26.2021
+41 Ivan 123 576 154 01.28.2021 02.28.2021 03.28.2021
+43 Maxim 4123 154 0045576 01.24.2021 02.24.2021 03.24.2021 
+12 Petro 0 0 0 01.27.2021 02.24.2021 2.24.2021
 
 Amount of apartments: 4, quarter: 2
-[4, 	Apartment number: 4,  	owner: Tolmachov, 	incoming counter value: 123,  	output counter value: 576,	date: 25 May 2021  	]
-[41, 	Apartment number: 41,  	owner: Ivan, 	incoming counter value: 123,  	output counter value: 576,	date: 22 August 2021  	]
-[43, 	Apartment number: 43,  	owner: Maxim, 	incoming counter value: 4123,  	output counter value: 45576,	date: 5 August 2021  	]
-[12, 	Apartment number: 12,  	owner: Petro, 	incoming counter value: 0,  	output counter value: 0,	date: 4 August 2021  	]
+Owner      April      May        June       Cost (UAH)
+Tolmachov  123        576        124        823
+Ivan       123        576        154        853
+Maxim      4123       154        45576      49853
+Petro      0          0          0          0
 
-Price for flat n4: 206.64 grn
-Price for flat n41: 206.64 grn
-Price for flat n43: 6926.6396 grn
-Price for flat n12: 0 grn
+Price for flat n4: 1382.64 UAH
+Price for flat n41: 1433.0399 UAH
+Price for flat n43: 83753.04 UAH
+Price for flat n12: 0 UAH
 
-	Apartment number: 41,  	owner: Ivan, 	incoming counter value: 123,  	output counter value: 576,	date: 22 August 2021  	
 Name with largest debt:Maxim
-Number Flat With No Consuming: 12
-Last days from last taken info of 41 appartment: 78
+Number flat with no consuming: 12
+Last days from last taken info of 41 appartment (march): 73

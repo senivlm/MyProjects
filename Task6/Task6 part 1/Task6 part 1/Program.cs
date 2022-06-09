@@ -14,10 +14,10 @@ namespace Task6_part_1
                 CommunalPrintHandler.PrintSomethingInFile(CommunalPrintHandler.DefinePricesForIncomingCounters());
                 CommunalPrintHandler.WriteOneFlatInfoInFile(41);
                 CommunalPrintHandler.PrintSomethingInFile("Name with largest debt:" + CommunalPrintHandler.FindNameWithLargestDebt());
-                CommunalPrintHandler.PrintSomethingInFile("Number Flat With No Consuming: " + CommunalPrintHandler.FindNumberFlatWithNoConsuming());
-                CommunalPrintHandler.PrintSomethingInFile("Last days from last taken info of 41 appartment: " + CommunalPrintHandler.FindLastDaysFromLastTakenInfo(41));
+                CommunalPrintHandler.PrintSomethingInFile("Number flat with no consuming: " + CommunalPrintHandler.FindNumberFlatWithNoConsuming());
+                CommunalPrintHandler.PrintSomethingInFile("Last days from last taken info of 41 appartment (march): " + CommunalPrintHandler.FindLastDaysFromLastTakenInfo(41, 3));
             }
-            catch(FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
                 Console.WriteLine(ex);
             }
