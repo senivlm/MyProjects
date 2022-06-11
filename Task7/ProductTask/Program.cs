@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ProductProject;
 
 class Program
@@ -15,6 +16,10 @@ class Program
             Console.WriteLine(storage[1]); // object after change
 			
 		}
+		catch(FileNotFoundException ex)
+        {
+            Console.WriteLine(ex);
+        }
 		catch(Exception ex)
         {
             Console.WriteLine(ex);
