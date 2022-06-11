@@ -1,0 +1,7 @@
+
+Created succesfuly name: Apple, price: 20, weight: 4, index: 0 - 6/11/2022 10:39:43 AM
+Wrong format for weight  - 6/11/2022 10:39:43 AM
+Created succesfuly name: Chips, price: 20, weight: 0.5, index: 1 - 6/11/2022 10:39:43 AM
+Created succesfuly name: Lemons, price: 5, weight: 0.5, index: 2 - 6/11/2022 10:39:43 AM
+Wrong format for price  - 6/11/2022 10:39:43 AM
+Wrong format for weight  - 6/11/2022 10:39:43 AM

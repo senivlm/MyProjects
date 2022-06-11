@@ -1,0 +1,5 @@
+﻿apple 20 4
+banana 45 bg
+chips 20 0.5
+lemons 5 0.5
+chocolate df dgas
