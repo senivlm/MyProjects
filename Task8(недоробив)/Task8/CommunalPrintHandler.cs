@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Task6_part_1
+namespace Task8
 {
     public class CommunalPrintHandler
     {
@@ -10,7 +10,7 @@ namespace Task6_part_1
         private int quarter;
         private Dictionary<int, FlatInfoMonth[]> flatsInfo;
         public static readonly float PriceForElectricity = 1.68f;
-        private int tabulation;
+        private int tabulation = 3;
         private string currentPath;
 
         public CommunalPrintHandler(string path)
@@ -20,14 +20,7 @@ namespace Task6_part_1
 
         public void ChangePath(string path)
         {
-            if (path != null)
-            {
-                currentPath = path;
-            }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+            currentPath = path;
         }
 
         public void ReadAccountingElectricty()
@@ -89,13 +82,46 @@ namespace Task6_part_1
             }
         }
 
+        public static CommunalPrintHandler operator+(CommunalPrintHandler handler1, CommunalPrintHandler handler2)
+        {
+            var handler3 = new CommunalPrintHandler(handler1.currentPath);
+            handler3.flatsInfo = new Dictionary<int, FlatInfoMonth[]>();
+            foreach (var item in handler1.flatsInfo)
+            {
+                handler3.flatsInfo[item.Key] = item.Value;
+            }
+            foreach (var item in handler2.flatsInfo)
+            {
+                handler3.flatsInfo[item.Key] = item.Value;
+            }
+            handler3.quarter = handler1.quarter;
+            handler3.tabulation = handler1.tabulation;
+            return handler3;
+        }
+
+        public static CommunalPrintHandler operator -(CommunalPrintHandler handler1, CommunalPrintHandler handler2)
+        {
+            var handler3 = new CommunalPrintHandler(handler1.currentPath);
+            handler3.flatsInfo = new Dictionary<int, FlatInfoMonth[]>();
+            foreach (var item in (handler1 + handler2).flatsInfo)
+            {
+                if(!(handler2.flatsInfo.ContainsKey(item.Key) && handler2.flatsInfo[item.Key][0].PayerName == item.Value[0].PayerName))
+                {
+                    handler3.flatsInfo[item.Key] = item.Value;
+                }
+            }
+            handler3.quarter = handler1.quarter;
+            handler3.tabulation = handler1.tabulation;
+            return handler3;
+        }
+
         public void WriteInfoFlatsInFile()
         {
             using (var sw = new StreamWriter(currentPath, true))
             {
                 string[] months = convertQuarterToMonth(quarter);
                 sw.WriteLine();
-                sw.WriteLine("Amount of apartments: {0}, quarter: {1}", flatAmount, quarter);
+                sw.WriteLine("Amount of apartments: {0}, quarter: {1}", flatsInfo.Count, quarter);
                 sw.WriteLine($"{computeTabulation("№")}{computeTabulation("Owner")}{computeTabulation(months[0])}" +
                     $"{computeTabulation(months[1])}{computeTabulation(months[2])}Cost (UAH)");
                 foreach (var item in flatsInfo)
