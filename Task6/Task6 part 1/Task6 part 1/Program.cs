@@ -4,7 +4,7 @@ using System.IO;
 namespace Task6_part_1
 {
     class Program
-    {
+    {// виведення не до кінця форматоване. Попрацюйте ще з форматами дат та String.Format
         static void Main(string[] args)
         {
             try
