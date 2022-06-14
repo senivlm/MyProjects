@@ -18,7 +18,7 @@ namespace Task6_part2
         public void DivideTextIntoSentences()
         {
             using(var sr = new StreamReader(filePath))
-            {
+            {// Розділювачем може бути не тільки крапка.
                 sentences = sr.ReadToEnd().Split(".", StringSplitOptions.RemoveEmptyEntries);
             }
         }
@@ -36,7 +36,7 @@ namespace Task6_part2
         }
 
         public void PrintLongestShortestWordsInEachSentences()
-        {
+        {//Користуйтесь?
             if(sentences == null)
             {
                 throw new NullReferenceException("Sentences was not found. Try to divide text before");
