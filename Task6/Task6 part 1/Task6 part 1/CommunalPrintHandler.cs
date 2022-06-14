@@ -251,6 +251,7 @@ namespace Task6_part_1
     public string ConvertToFullData(DateTime date)
     {
         string fullData = date.Day + " ";
+        //тут не оптимально. Слід скористатись переведенням в різні формати
         switch (date.Month)
         {
             case 1:
