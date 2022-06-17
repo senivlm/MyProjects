@@ -2,4 +2,6 @@
 banana 45 bg
 chips 20 0.5
 lemons 5 0.5
+chicken 100 3 chicken HighSort1 7/15/2022
+milk 45 0.8 6/15/2022
 chocolate df dgas

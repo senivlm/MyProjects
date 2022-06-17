@@ -1,0 +1,21 @@
+﻿139.18.150.126 23:12:44 sunday
+139.18.150.126 23:15:44 sunday
+137.18.150.126 9:00:44 monday
+131.18.150.126 10:12:44 tuesday
+132.18.150.126 10:18:44 wednesday
+127.18.150.126 10:12:44 thursday
+129.18.150.126 11:17:44 friday
+119.18.150.126 16:11:44 saturday
+
+139.18.150.126 visited 2 times
+137.18.150.126 visited 1 times
+131.18.150.126 visited 1 times
+132.18.150.126 visited 1 times
+127.18.150.126 visited 1 times
+129.18.150.126 visited 1 times
+119.18.150.126 visited 1 times
+
+Most active ip: 139.18.150.126
+Most visited day:  Sunday
+Most visited time interval:  10
+Most visited time interval in defined day(sunday): 23

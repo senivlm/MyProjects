@@ -10,9 +10,9 @@ class Program
 		{
 			Storage storage = new Storage();
 			LogHandler<Product> logHandler = new LogHandler<Product>(@"D:\allprjcts\MyProjects\Task7\ProductTask\RegistLogs.txt");
-			storage.AddItemsFromFile(@"D:\allprjcts\MyProjects\Task7\ProductTask\TextFile.txt", logHandler);
+			storage.AddItemsFromFile(@"D:\allprjcts\MyProjects\Task7\ProductTask\ProductList.txt", logHandler);
             Console.WriteLine(storage[1]); // object before change
-			logHandler.GetLogObject(1).ChangePrice(70);
+			logHandler.GetLogObject(1).ChangePrice(70); // to change object from logs
             Console.WriteLine(storage[1]); // object after change
 			
 		}

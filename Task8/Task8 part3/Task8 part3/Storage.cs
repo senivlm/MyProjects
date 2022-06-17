@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 namespace ProductProject
 {
-    public class Storage : IBusketWithProducts
+    public class Storage : IBusketWithProducts, IEnumerable<Product>
     {
         private List<Product> _products;
 
@@ -35,6 +36,59 @@ namespace ProductProject
                     return _products[i];
                 throw new ArgumentException();
             }
+        }
+        public IEnumerable<Product> NotRepetitiveElementsInCompareTo(Storage storage)
+        {
+            return ElementsInCompareTo(storage, false);
+        }
+
+        public IEnumerable<Product> MutualElementsInCompareTo(Storage storage)
+        {
+            return ElementsInCompareTo(storage, true);
+        }
+
+        public IEnumerable<Product> UniqueMutualElementsInCompareTo(Storage storage)
+        {
+            var products = new List<Product>();
+            foreach (var item1 in this)
+            {
+                bool Change = false;
+                foreach (var item2 in storage)
+                {
+                    if (item1 == item2)
+                    {
+                        Change = true;
+                    }
+                }
+                
+                if (Change && !products.Contains(item1))
+                {   
+                    products.Add(item1);
+                }
+            }
+            return products;
+        }
+
+        private IEnumerable<Product> ElementsInCompareTo(Storage storage, bool isRepititive)
+        {
+            var products = new List<Product>();
+            foreach (var item1 in this)
+            {
+                bool Change = !isRepititive;
+                foreach (var item2 in storage)
+                {
+                    if (item1 == item2)
+                    {
+                        Change = isRepititive;
+                        break;
+                    }
+                }
+                if (Change)
+                {
+                    products.Add(item1);
+                }
+            }
+            return products;
         }
 
         public void AddItemsFromFile(string path, LogHandler<Product> logHandler)
@@ -191,6 +245,19 @@ namespace ProductProject
         public override int GetHashCode()
         {
             return HashCode.Combine(_products);
+        }
+
+        public IEnumerator<Product> GetEnumerator()
+        {
+            for (int i = 0; i < _products.Count; i++)
+            {
+                yield return _products[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

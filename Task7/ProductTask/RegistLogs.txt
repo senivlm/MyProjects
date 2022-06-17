@@ -1,7 +1,18 @@
-
-Created succesfuly name: Apple, price: 20, weight: 4, index: 0 - 6/11/2022 10:39:43 AM
-Wrong format for weight  - 6/11/2022 10:39:43 AM
-Created succesfuly name: Chips, price: 20, weight: 0.5, index: 1 - 6/11/2022 10:39:43 AM
-Created succesfuly name: Lemons, price: 5, weight: 0.5, index: 2 - 6/11/2022 10:39:43 AM
-Wrong format for price  - 6/11/2022 10:39:43 AM
-Wrong format for weight  - 6/11/2022 10:39:43 AM
+Created succesfuly name: Apple, price: 20, weight: 4, index: 0 - 6/17/2022 11:59:49 AM
+Wrong format for weight  - 6/17/2022 11:59:49 AM
+Created succesfuly name: Chips, price: 20, weight: 0.5, index: 1 - 6/17/2022 11:59:49 AM
+Created succesfuly name: Lemons, price: 5, weight: 0.5, index: 2 - 6/17/2022 11:59:49 AM
+Created succesfuly name: Chicken, price: 125, weight: 3
+ Date to expire: 7/15/2022 12:00:00 AM, meat category: HighSort1, meat species: chicken, index: 3 - 6/17/2022 11:59:49 AM
+Created succesfuly name: Milk, price: 45, weight: 0.8.Date to expire: 6/15/2022 12:00:00 AM, index: 4 - 6/17/2022 11:59:49 AM
+Wrong format for price  - 6/17/2022 11:59:49 AM
+Wrong format for weight  - 6/17/2022 11:59:49 AM
+Created succesfuly name: Apple, price: 20, weight: 4, index: 0 - 6/17/2022 12:12:04 PM
+Wrong format for weight  - 6/17/2022 12:12:04 PM
+Created succesfuly name: Chips, price: 20, weight: 0.5, index: 1 - 6/17/2022 12:12:04 PM
+Created succesfuly name: Lemons, price: 5, weight: 0.5, index: 2 - 6/17/2022 12:12:04 PM
+Created succesfuly name: Chicken, price: 125, weight: 3
+ Date to expire: 7/15/2022 12:00:00 AM, meat category: HighSort1, meat species: chicken, index: 3 - 6/17/2022 12:12:04 PM
+Created succesfuly name: Milk, price: 45, weight: 0.8.Date to expire: 6/15/2022 12:00:00 AM, index: 4 - 6/17/2022 12:12:04 PM
+Wrong format for price  - 6/17/2022 12:12:04 PM
+Wrong format for weight  - 6/17/2022 12:12:04 PM
