@@ -5,7 +5,7 @@ using System.IO;
 namespace Task8
 {
     public class CommunalPrintHandler
-    {
+    {//молодець. подивіться як робити копії колецій. Перегляньте длля різних колекцій перевантаження конструкторів
         private int flatAmount;
         private int quarter;
         private Dictionary<int, FlatInfoMonth[]> flatsInfo;
