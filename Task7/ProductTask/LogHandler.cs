@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace ProductProject
-{
+{//Дуже вдале узагальнення. Молодець.
     public class LogHandler<T>
     {
         private List<string> errors = new List<string>();
