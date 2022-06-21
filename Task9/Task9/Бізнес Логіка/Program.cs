@@ -8,7 +8,7 @@
             var menu = MenuReader.GetMenuListFromFile(@"D:\MyProjects\Task9\Task9\Menu.txt");
             var priceKurant = MenuReader.GetPriceKurantFromFile(@"D:\MyProjects\Task9\Task9\Prices.txt");
             // прив*язання до події коли ми не можемо зчитати прайскурант відповідної функції
-            priceKurant.PriceWasNotFound += PriceKurantHandler.TryToEnterPriceConsole;
+            priceKurant.PriceWasNotFound += MenuReader.TryToEnterPriceConsole;
 
             CurrencyExchange.ReadExchangeRateFromFile(@"D:\MyProjects\Task9\Task9\Course.txt");
 

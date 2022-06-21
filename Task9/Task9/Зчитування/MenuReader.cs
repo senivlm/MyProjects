@@ -84,5 +84,17 @@
             }
             return priceKurant;
         }
+
+        public static bool TryToEnterPriceConsole(string name, PriceKurant priceKurant)
+        {
+            Console.WriteLine($"Try to enter price for {name}");
+            string text = Console.ReadLine();
+            if (!double.TryParse(text, out double price))
+            {
+                return false;
+            }
+            priceKurant.AddProduct(name, price);
+            return true;
+        }
     }
 }
