@@ -1,4 +1,5 @@
-﻿namespace _2Dmatrix
+﻿
+namespace _2Dmatrix
 {
     class Program {
         static void Main(string[] args)
