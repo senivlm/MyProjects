@@ -4,7 +4,7 @@ namespace _2Dmatrix
     class Program {
         static void Main(string[] args)
         {
-            Matrix matrix = new Matrix();
+            var matrix = new Matrix();
             foreach (var item in matrix)
             {
                 Console.WriteLine(item);

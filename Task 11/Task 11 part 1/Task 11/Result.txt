@@ -1,0 +1,16 @@
+﻿Cпільні продукти: 
+name: Apple, price: 20, weight: 4
+name: Banana, price: 45, weight: 0.6
+name: Chips, price: 20, weight: 0.5
+name: Chips, price: 20, weight: 0.5
+--------------------
+Продукти які не повторюються: 
+name: Milk, price: 45, weight: 0.8.Date to expire: 7/16/2022 12:00:00 AM
+name: Chicken, price: 150, weight: 3
+ Date to expire: 7/8/2022 12:00:00 AM, meat category: HighSort1, meat species: chicken
+--------------------
+Унікальні спільні продукти(без повторів): 
+name: Apple, price: 20, weight: 4
+name: Banana, price: 45, weight: 0.6
+name: Chips, price: 20, weight: 0.5
+--------------------
