@@ -3,12 +3,11 @@ using Task_11.Products;
 
 namespace Task_11.Storage
 {
-    public class Storage<T> : IStorage<T>, IEnumerable<T>
-        where T : Product
+    public class Storage : IStorage<Product>, IEnumerable<Product>
     {
-        private List<T> _products;
+        private List<Product> _products;
 
-        public virtual event Action<T> ProductAvaliableEvent;
+        public virtual event Action<Product> ProductAvaliableEvent;
 
         public int ProductAmount
         {
@@ -17,12 +16,12 @@ namespace Task_11.Storage
 
         public Storage()
         {
-            _products = new List<T>();
+            _products = new List<Product>();
         }
 
-        public Storage(params T[] products)
+        public Storage(params Product[] products)
         {
-            _products = new List<T>();
+            _products = new List<Product>();
             foreach (var item in products)
             {
                 if (!_products.Contains(item))
@@ -31,7 +30,7 @@ namespace Task_11.Storage
             }
         }
 
-        public T this[int i]
+        public Product this[int i]
         {
             get
             {
@@ -41,7 +40,7 @@ namespace Task_11.Storage
             }
         }
 
-        public void AddItem(T? item)
+        public void AddItem(Product? item)
         {
             if (item != null)
             {
@@ -51,7 +50,7 @@ namespace Task_11.Storage
             }
         }
 
-        public void RemoveItem(T? item)
+        public void RemoveItem(Product? item)
         {
             if (item != null)
             {
@@ -84,8 +83,8 @@ namespace Task_11.Storage
 
         public override bool Equals(object? obj)
         {
-            return obj is Storage<T> storage &&
-                   EqualityComparer<List<T>>.Default.Equals(_products, storage._products);
+            return obj is Storage storage &&
+                   EqualityComparer<List<Product>>.Default.Equals(_products, storage._products);
         }
 
         public override int GetHashCode()
@@ -93,7 +92,7 @@ namespace Task_11.Storage
             return HashCode.Combine(_products);
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<Product> GetEnumerator()
         {
             for (int i = 0; i < _products.Count; i++)
             {

@@ -6,7 +6,7 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var storage = new Storage<Product>();
+		var storage = new Storage<SomeProduct>();
 		storage.ProductAvaliableEvent += a => Console.WriteLine($"{a} is available!");
 		SomeProduct someProduct = new SomeProduct("apple", 10, 10);
 		SomeProduct someProduct1 = new SomeProduct("apple", 15, 10);
