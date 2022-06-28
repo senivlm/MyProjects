@@ -13,10 +13,12 @@ namespace Task10
             text = Reader.ReadText(@"../../../Text.txt");
             //логіка
             var translator = new Translator(dictionary, Reader.AddToDictionary);
+            // А цю частинку Ви не хочете захистити?
             string translatedText = translator.TranslateText(text);
             //швидкий вивід
             try
             {
+                // Як правило для об'єкта StreamWriter використовують sw))))
                 using(var sr = new StreamWriter(@"../../../Text.txt", true))
                 {
                     sr.WriteLine();
