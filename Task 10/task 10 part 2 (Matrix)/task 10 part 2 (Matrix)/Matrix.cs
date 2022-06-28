@@ -17,7 +17,7 @@ namespace _2Dmatrix
                 }
             }
         }
-
+// я про цю частку хотіла б детальніше поговорити. Зголосіться на парі.
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
