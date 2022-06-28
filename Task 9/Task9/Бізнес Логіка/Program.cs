@@ -3,7 +3,7 @@
     class Program
     {
         public static void Main()
-        {
+        {//  У результуючому файлі немає сумарної кількості продуктів кожного виду, які треба закупити
             //зчитування даних
             var menu = MenuReader.GetMenuListFromFile(@"D:\MyProjects\Task9\Task9\Menu.txt");
             var priceKurant = MenuReader.GetPriceKurantFromFile(@"D:\MyProjects\Task9\Task9\Prices.txt");
@@ -19,6 +19,7 @@
             {
                 PriceKurantHandler.PrintPriceKurant(menu, priceKurant, (Currencies)res, @"D:\MyProjects\Task9\Task9\result.txt");
             }
+            //без потреби
             else
             {
                 return;
