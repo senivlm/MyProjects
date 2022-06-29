@@ -97,7 +97,7 @@ namespace Task_11.Storage
         {
             for (int i = 0; i < _products.Count; i++)
             {
-                yield return _products[i].Clone();
+                yield return (T)_products[i].Clone();
             }
         }
 

@@ -46,6 +46,15 @@ namespace Task_11.Products
             this.weight = weight;
         }
 
+        public Product(Product product)
+        {
+            if (price < 0 || weight < 0 || name == null)
+                throw new ArgumentException("wrong argument");
+            name = product.name;
+            price = product.price;
+            weight = product.weight;
+        }
+
         public abstract Product Clone();
 
         public override string ToString()
