@@ -43,6 +43,7 @@ namespace Task_11.Storage
             }
         }
 
+        //універсальний пошук
         public ICollection<T> FindWithNameAndValue<T1>(string? name, T1 value) where T1 : IComparable
         {
             List<T> list = new List<T>();

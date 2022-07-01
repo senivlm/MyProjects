@@ -11,9 +11,16 @@ class Program
 		storage.ProductAvaliableEvent += prod => Console.WriteLine($"({prod}) is available!");
 		storage.ProductIsExpiredEvent += prod =>
 		{
-			using(var sw = new StreamWriter(@"D:\MyProjects\Task 12\Task 12 part 1\Task 12 part 1\GarbageList.txt", true))
+			try
+			{
+				using (var sw = new StreamWriter(@"D:\MyProjects\Task 12\Task 12 part 1\Task 12 part 1\GarbageList.txt", true))
+				{
+					sw.WriteLine($"{prod} is expired. It was thrown");
+				}
+			}
+			catch(FileNotFoundException ex)
             {
-				sw.WriteLine($"{prod} is expired. It was thrown");
+                Console.WriteLine(ex);
             }
 		};
 		var someProduct1 = new SomeProduct("apple", 10, 1);
