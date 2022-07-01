@@ -6,7 +6,7 @@ namespace Task_11.Storage
 {
     static class StorageReaderExtenion
     {
-        public static void AddItemsFromFile(this Storage storage, string? path, LogHandler<Product> logHandler)
+        public static void AddItemsFromFile(this Storage<Product> storage, string? path, LogHandler<Product> logHandler)
         {
             for (int i = 0; Path.GetFileName(path) == null && i < 3; i++)
             {

@@ -46,6 +46,11 @@ namespace Task_11.Products
             this.weight = weight;
         }
 
+        public Product(Product product)
+            : this(product.name, product.price, product.weight)
+        {
+        }
+
         public abstract Product Clone();
 
         public override string ToString()

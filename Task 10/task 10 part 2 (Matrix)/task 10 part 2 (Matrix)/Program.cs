@@ -13,12 +13,15 @@ namespace _2Dmatrix
             Console.WriteLine("n: ");
             int n = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("direction: ");
-            object dir;
+            object? dir;
             if(!Enum.TryParse(typeof(Directions), Console.ReadLine(), out dir))
             {
                 Console.WriteLine("That direction does not exist");
                 return;
             }
+
+
+
             foreach (var item in matrix.GetEnumeratorDiagonalSnake(n, (Directions)dir))
             {
                 Console.WriteLine(item);

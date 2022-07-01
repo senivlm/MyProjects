@@ -4,17 +4,20 @@ namespace Task_11.Storage
 {
     static class StorageComparerExtension
     {
-        public static IEnumerable<Product> NotRepetitiveElementsInCompareTo(this Storage storage1, Storage storage2)
+        public static IEnumerable<Product> NotRepetitiveElementsInCompareTo<T>(this IStorage<T> storage1, IStorage<T> storage2)
+            where T : Product
         {
             return storage1.ElementsInCompareTo(storage2, false);
         }
 
-        public static IEnumerable<Product> MutualElementsInCompareTo(this Storage storage1, Storage storage2)
+        public static IEnumerable<Product> MutualElementsInCompareTo<T>(this IStorage<T> storage1, IStorage<T> storage2)
+            where T : Product
         {
             return storage1.ElementsInCompareTo(storage2, true);
         }
 
-        public static IEnumerable<Product> UniqueMutualElementsInCompareTo(this Storage storage1, Storage storage2)
+        public static IEnumerable<Product> UniqueMutualElementsInCompareTo<T>(this IStorage<T> storage1, IStorage<T> storage2)
+            where T : Product
         {
             var products = new List<Product>();
             foreach (var item1 in storage1)
@@ -35,7 +38,8 @@ namespace Task_11.Storage
             return products;
         }
 
-        private static IEnumerable<Product> ElementsInCompareTo(this Storage storage1, Storage storage2, bool isRepititive)
+        private static IEnumerable<Product> ElementsInCompareTo<T>(this IStorage<T> storage1, IStorage<T> storage2, bool isRepititive)
+            where T : Product
         {
             var products = new List<Product>();
             foreach (var item1 in storage1)

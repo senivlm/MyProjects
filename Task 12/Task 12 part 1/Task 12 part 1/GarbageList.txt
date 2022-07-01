@@ -1,0 +1,1 @@
+﻿name: chicken, price: 100, weight: 2.Date to expire: 4/15/2008 12:00:00 AM is expired. It was thrown
