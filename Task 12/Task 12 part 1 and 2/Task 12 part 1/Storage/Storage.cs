@@ -30,6 +30,10 @@ namespace Task_11.Storage
                 if (!_products.Contains(item))
                     ProductAvaliableEvent?.Invoke(item);
                 _products.Add(item);
+                if (isExpired(item))
+                {
+                    ProductIsExpiredEvent?.Invoke(item);
+                }
             }
         }
 
@@ -79,17 +83,26 @@ namespace Task_11.Storage
             {
                 return;
             }
-            if (item is IExpirableProduct expirableProduct
-                && expirableProduct.TimeToExpire < DateTime.Now)
-            {
-                ProductIsExpiredEvent?.Invoke(item);
-                return;
-            }
             else if (!_products.Contains(item))
             {
                 ProductAvaliableEvent?.Invoke(item);
             }
             _products.Add(item);
+
+            if (isExpired(item))
+            {
+                ProductIsExpiredEvent?.Invoke(item);
+            }
+        }
+
+        private bool isExpired(T? item)
+        {
+            if (item is IExpirableProduct expirableProduct
+               && expirableProduct.TimeToExpire < DateTime.Now)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void RemoveItem(T? item)

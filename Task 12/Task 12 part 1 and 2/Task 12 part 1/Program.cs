@@ -13,9 +13,10 @@ class Program
 		{
 			try
 			{
-				using (var sw = new StreamWriter(@"D:\MyProjects\Task 12\Task 12 part 1\Task 12 part 1\GarbageList.txt", true))
+				using (var sw = new StreamWriter(@"D:\MyProjects\Task 12\Task 12 part 1 and 2\Task 12 part 1\GarbageList.txt", true))
 				{
 					sw.WriteLine($"{prod} is expired. It was thrown");
+					storage.RemoveItem(prod);
 				}
 			}
 			catch(FileNotFoundException ex)
