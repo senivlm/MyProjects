@@ -1,0 +1,3 @@
+Normal notation: (-54+45)*sin(5)-(4+-5)
+Postfix(polish) notation: -54 45 + 5 sin * 4 -5 + 
+Result: -5

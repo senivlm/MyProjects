@@ -85,7 +85,8 @@
     
 
     public bool IsUnaryOperator(string operat) => unaryOperators.ContainsKey(operat);
-    
+
+    public bool IsOperator(string operat) => unaryOperators.ContainsKey(operat) || binaryOperators.ContainsKey(operat);
 
     public Calculator Copy()
     {

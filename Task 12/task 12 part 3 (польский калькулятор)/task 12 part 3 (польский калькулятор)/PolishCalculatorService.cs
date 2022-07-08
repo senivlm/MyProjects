@@ -1,14 +1,14 @@
 ﻿class PolishCalculatorService
 {
-    private string line;
-    public PolishCalculatorService(string line)
+    private string notation;
+    public PolishCalculatorService(string notation)
     {
-        this.line = line;
+        this.notation = notation;
     }
 
-    public void ChangeLine(string line)
+    public void ChangeLine(string notation)
     {
-        this.line = line;
+        this.notation = notation;
     }
 
     public double Compute(ICalculator calculator)
@@ -26,7 +26,7 @@
 
     private double compute(ICalculator calculator)
     {
-        string[] numbersAndOper = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        string[] numbersAndOper = notation.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach (var item in numbersAndOper)
         {
             double x = 0;
