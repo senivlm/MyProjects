@@ -28,12 +28,14 @@ class Program
 		var someProduct2 = new SomeProduct("banana", 10, 2);
 		var someProduct3 = new SomeProduct("apple", 15, 1);
 		var expiredProduct = new MilkProduct("chicken", 100, 2, new DateTime(2008,4,15));
+		var expirableProduct = new MilkProduct("chicken", 100, 2, new DateTime(2023, 8, 15));
 		storage.AddItem(someProduct1);
 		storage.AddItem(someProduct2);
 		storage.AddItem(someProduct3);
 		storage.AddItem(expiredProduct);
+		storage.AddItem(expirableProduct);
 
-		var products = storage.FindWithNameAndValue("Price", 10);
+		var products = storage.FindWithNameAndPredicate((x) => x.Name == "TimeToExpire");
         foreach (var item in products)
         {
             Console.WriteLine(item);

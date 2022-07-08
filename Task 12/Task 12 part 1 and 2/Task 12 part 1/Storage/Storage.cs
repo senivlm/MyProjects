@@ -47,19 +47,30 @@ namespace Task_11.Storage
             }
         }
 
-        //універсальний пошук
-        public ICollection<T> FindWithNameAndValue<T1>(string? name, T1 value) where T1 : IComparable
+        //пошук по предикату
+        public IEnumerable<T> Select(Func<T, bool> predicate)
+        {
+            foreach (var item in this)
+            {
+                if (predicate(item))
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        //універсальний пошук по ідентифікатору та предикату
+        public ICollection<T> FindWithNameAndPredicate(Func<PropertyInfo, bool> predicate)
         {
             List<T> list = new List<T>();
             try
             {
-                Type typeObj = value.GetType();
                 foreach (var item in this)
                 {
                     Type type = item.GetType();
                     foreach (PropertyInfo field in type.GetProperties())
                     {
-                        if (field.Name == name && value.CompareTo(field.GetValue(item, null)) == 0)
+                        if (predicate(field))
                         {
                             list.Add((T)item.Clone());
                         }
