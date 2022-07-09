@@ -2,11 +2,11 @@
 {
     private Dictionary<string, Func<double, double, double>> binaryOperators;
     private Dictionary<string, Func<double, double>> unaryOperators;
-    private Queue<double> operands; 
+    private Stack<double> operands; 
 
     public Calculator()
     {
-        operands = new Queue<double>();
+        operands = new Stack<double>();
         binaryOperators = new Dictionary<string, Func<double, double, double>>();
         binaryOperators.Add("+", (x, y) => x + y);
         binaryOperators.Add("*", (x, y) => x * y);
@@ -40,7 +40,7 @@
     {
         foreach (var item in values)
         {
-            operands.Enqueue(item);
+            operands.Push(item);
         }
     }
 
@@ -50,7 +50,7 @@
         {
             throw new Exception();
         }
-        return operands.Dequeue();
+        return operands.Pop();
     }
 
     public double UseOperator(string sign)
@@ -59,15 +59,15 @@
         {
             throw new IndexOutOfRangeException();
         }
-        operands.Dequeue();
+        operands.Pop();
         if (binaryOperators.ContainsKey(sign))
         {
             if (!operands.TryPeek(out var operand2))
             {
                 throw new IndexOutOfRangeException();
             }
-            operands.Dequeue();
-            double x = binaryOperators[sign](operand1, operand2);
+            operands.Pop();
+            double x = binaryOperators[sign](operand2, operand1);
             return x;
         }
         else if (unaryOperators.ContainsKey(sign))
@@ -83,7 +83,6 @@
 
     public bool IsBinaryOperator(string operat) => binaryOperators.ContainsKey(operat);
     
-
     public bool IsUnaryOperator(string operat) => unaryOperators.ContainsKey(operat);
 
     public bool IsOperator(string operat) => unaryOperators.ContainsKey(operat) || binaryOperators.ContainsKey(operat);
@@ -93,9 +92,7 @@
         var calc = new Calculator();
         calc.binaryOperators = new Dictionary<string, Func<double, double, double>>(binaryOperators);
         calc.unaryOperators = new Dictionary<string, Func<double, double>>(unaryOperators);
-        calc.operands = new Queue<double>();
+        calc.operands = new Stack<double>();
         return calc;
     }
-
-    public double PeekLastValue() => operands.Dequeue();
 }

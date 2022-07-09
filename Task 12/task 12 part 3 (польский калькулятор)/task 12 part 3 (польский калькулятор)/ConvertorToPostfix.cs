@@ -24,6 +24,7 @@
 
     public string ConvertToPostfixNotation(string text, ICalculator calculator)
     {
+        text = "(" + text + ")";
         string postfixEx = "";
         Stack<string> stack = new Stack<string>();
         List<string> dividedNotation = (List<string>)divideToOperandsAndFuncs(text, calculator);
@@ -47,11 +48,9 @@
             }
             else
             {
-                int prior = stack.Count > 0 ? priority[stack.Peek()] : 0;
-                while (prior >= priority[dividedNotation[i]])
+                while (priority[stack.Peek()] >= priority[dividedNotation[i]])
                 {
                     postfixEx += stack.Pop() + " ";
-                    prior = stack.Count > 0 ? priority[stack.Peek()] : 0;
                 }
                 stack.Push(dividedNotation[i]);
             }
@@ -68,11 +67,11 @@
         for (int i = 0; i < text.Length; i++)
         {
             if (char.IsDigit(text[i]) ||
-                (calculator.IsOperator(char.ToString(text[i])) && char.IsDigit(text[i + 1])
+                (text[i] == '-' && calculator.IsOperator(char.ToString(text[i])) && char.IsDigit(text[i + 1])
                 && !char.IsDigit(expression[expression.Count - 1][expression[expression.Count - 1].Length - 1])))
             {
                 string number = char.ToString(text[i]);
-                while (text.Length - 1 > i && char.IsDigit(text[++i]))
+                while (text.Length - 1 > i && (char.IsDigit(text[++i]) || text[i] == '.'))
                 {
                     number += text[i];
                 }
@@ -95,12 +94,19 @@
                     func += text[i];
                 }
                 expression.Add(func);
-                string number = char.ToString(text[++i]);
-                while (text.Length - 1 > i && char.IsDigit(text[++i]))
+                expression.Add(char.ToString(text[i]));
+                string number = "";
+                while (text.Length - 1 > i && text[++i] == '(')
+                {
+                    expression.Add(char.ToString(text[i]));
+                }
+                number += text[i];
+                while (text.Length - 1 > i && (char.IsDigit(text[++i]) || text[i] == '.'))
                 {
                     number += text[i];
                 }
                 expression.Add(number);
+                expression.Add(char.ToString(text[i]));
             }
         }
         return expression;

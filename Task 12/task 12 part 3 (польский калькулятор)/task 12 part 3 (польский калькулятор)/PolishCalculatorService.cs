@@ -34,12 +34,12 @@
             {
                 calculator.AddValue(x);
             }
-            else if (calculator.IsUnaryOperator(item) || calculator.IsBinaryOperator(item))
+            else if (calculator.IsOperator(item))
             {
                 calculator.AddValue(calculator.UseOperator(item));
             }
         }
-        return calculator.PeekLastValue();
+        return calculator.PopValue();
     }
 
     private bool TryToDouble(string line, out double number)

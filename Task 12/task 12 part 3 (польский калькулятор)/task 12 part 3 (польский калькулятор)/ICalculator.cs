@@ -8,6 +8,5 @@
     public bool IsBinaryOperator(string operat);
     public bool IsUnaryOperator(string operat);
     public bool IsOperator(string operat);
-    public double PeekLastValue();
     public Calculator Copy();
 }
