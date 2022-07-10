@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task12_3
 {
-    internal class Reader : IExpresionReader
+    public class Reader : IExpresionReader
     {
         private string filePath;
 
@@ -29,7 +29,7 @@ namespace Task12_3
             filePath = "..\\..\\Files\\Persons.txt";
         }
 
-        public List<string> ReadExpresion(string filePath = @"C:\Users\Временный\source\repos\CassApp\CassApp\Files\Person.txt")
+        public List<string> ReadExpresion()
         {
             if (filePath == null || filePath == "") throw new FileNotFoundException();
             if (!File.Exists(filePath))  File.Create(filePath);

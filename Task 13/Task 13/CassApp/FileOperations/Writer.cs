@@ -1,4 +1,4 @@
-﻿using CassApp.Data;
+﻿using CassApp;
 
 namespace Task12_3
 {

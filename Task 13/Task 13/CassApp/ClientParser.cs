@@ -1,14 +1,15 @@
-﻿using System;
+﻿using CassApp.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CassApp.Data
+namespace CassApp
 {
     internal static class ClientParser
     {
-        public static Person Parse(string text)
+        public static IClient Parse(string text)
         {
             Random random = new Random();
             string[] atributes = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -17,7 +18,7 @@ namespace CassApp.Data
             int age;
             Guid guid;
             int timeService;
-            Coordinate? coordinate;
+            Coordinate coordinate;
             Status? status = null;
             if (!int.TryParse(atributes[1], out age))
             {
@@ -31,14 +32,15 @@ namespace CassApp.Data
             {
                 throw new FormatException();
             }
-            if (Enum.TryParse(typeof(Status), atributes[4], out object? obj))
-            {
-                status = (Status)obj;
-            }
-            if (!Coordinate.TryParse(atributes[5], out coordinate))
+            if (!Coordinate.TryParse(atributes[4], out coordinate))
             {
                 throw new FormatException();
             }
+            if (Enum.TryParse(typeof(Status), atributes[5], out object? obj))
+            {
+                status = (Status)obj;
+            }
+
             return new Client
                 (name, age, guid, timeService, coordinate, status);
         }

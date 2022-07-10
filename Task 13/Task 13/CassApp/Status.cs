@@ -1,4 +1,4 @@
-﻿namespace CassApp.Data
+﻿namespace CassApp
 {
     public enum Status
     {
