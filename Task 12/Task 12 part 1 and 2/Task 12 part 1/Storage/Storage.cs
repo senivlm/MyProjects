@@ -4,7 +4,7 @@ using Task_11.Products;
 
 namespace Task_11.Storage
 {
-    public class Storage<T> : IStorage<T>, IEnumerable<T>
+    public class Storage<T> : IStorage<T>, IStoragable<T>, IEnumerable<T>
         where T : Product
     {
         private List<T> _products;
@@ -59,8 +59,8 @@ namespace Task_11.Storage
             }
         }
 
-        //універсальний пошук по ідентифікатору та предикату
-        public ICollection<T> FindWithNameAndPredicate(Func<PropertyInfo, bool> predicate)
+        //універсальний пошук по предикату 
+        public ICollection<T> FindWithPredicate(Func<PropertyInfo, bool> predicate)
         {
             List<T> list = new List<T>();
             try

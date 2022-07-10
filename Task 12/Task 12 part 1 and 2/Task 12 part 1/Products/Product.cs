@@ -2,7 +2,13 @@
 
 namespace Task_11.Products
 {
-    public abstract class Product
+    public interface IProduct
+    {
+        public string Name { get; }
+        public int Price { get; }
+        public void ChangePrice(int percentage);
+    }
+    public abstract class Product : IProduct
     {
         protected string name;
         public string Name
@@ -61,11 +67,6 @@ namespace Task_11.Products
         public virtual void ChangePrice(int percentage)
         {
             Price = (int)(Price * (percentage / 100d));
-        }
-
-        public void Parse(string text)
-        {
-            throw new NotImplementedException();
         }
 
         public static bool operator ==(Product? product1, Product? product2)
