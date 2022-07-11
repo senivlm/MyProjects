@@ -2,9 +2,9 @@
 
 namespace Task_11.Storage
 {
-    public interface IStoragable<T> where T : IProduct
+    public interface IStoragable
     {
-        public void AddItem(T item);
-        public void RemoveItem(T item);
+        public void AddItem(object item);
+        public void RemoveItem(object item);
     }
 }

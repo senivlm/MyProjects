@@ -7,8 +7,5 @@ namespace Task_11.Storage
         public T this[int i] { get; }
         public int ProductAmount { get; }
         public event Action<T> ProductAvaliableEvent;
-
-        public void AddItem(T item);
-        public void RemoveItem(T item);
     }
 }

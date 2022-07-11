@@ -2,12 +2,6 @@
 
 namespace Task_11.Products
 {
-    public interface IProduct
-    {
-        public string Name { get; }
-        public int Price { get; }
-        public void ChangePrice(int percentage);
-    }
     public abstract class Product : IProduct
     {
         protected string name;
@@ -57,7 +51,7 @@ namespace Task_11.Products
         {
         }
 
-        public abstract Product Clone();
+        public abstract IProduct Clone();
 
         public override string ToString()
         {
@@ -91,6 +85,15 @@ namespace Task_11.Products
         public override int GetHashCode()
         {
             return HashCode.Combine(name, Name, price, Price, weight, Weight);
+        }
+
+        public void Parse(string text)
+        {
+            var data = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            name = data[0];
+            price = int.Parse(data[1]);
+            weight = double.Parse(data[2]);
+
         }
     }
 }

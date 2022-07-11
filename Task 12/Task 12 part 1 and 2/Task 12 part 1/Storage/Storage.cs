@@ -4,13 +4,13 @@ using Task_11.Products;
 
 namespace Task_11.Storage
 {
-    public class Storage<T> : IStorage<T>, IStoragable<T>, IEnumerable<T>
-        where T : Product
+    public class Storage<T> : IStorage<T>, IStoragable, IEnumerable<T>
+        where T : IProduct
     {
         private List<T> _products;
 
-        public virtual event Action<T> ProductAvaliableEvent;
-        public virtual event Action<T> ProductIsExpiredEvent;
+        public virtual event Action<T>? ProductAvaliableEvent;
+        public virtual event Action<T>? ProductIsExpiredEvent;
 
         public int ProductAmount
         {
@@ -88,21 +88,21 @@ namespace Task_11.Storage
             return list;
         }
 
-        public void AddItem(T? item)
+        public void AddItem(object item)
         {
             if (item == null)
             {
                 return;
             }
-            else if (!_products.Contains(item))
+            else if (!_products.Contains((T)item))
             {
-                ProductAvaliableEvent?.Invoke(item);
+                ProductAvaliableEvent?.Invoke((T)item);
             }
-            _products.Add(item);
+            _products.Add((T)item);
 
-            if (isExpired(item))
+            if (isExpired((T)item))
             {
-                ProductIsExpiredEvent?.Invoke(item);
+                ProductIsExpiredEvent?.Invoke((T)item);
             }
         }
 
@@ -116,11 +116,11 @@ namespace Task_11.Storage
             return false;
         }
 
-        public void RemoveItem(T? item)
+        public void RemoveItem(object item)
         {
             if (item != null)
             {
-                _products.Remove(item);
+                _products.Remove((T)item);
             }
         }
 
