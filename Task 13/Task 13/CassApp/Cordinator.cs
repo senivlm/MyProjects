@@ -2,20 +2,21 @@
 
 namespace CassApp
 {
-    public class Cordinator
+    public class Cordinator<T> where T : IClientQueue, new()
     {
-        private Dictionary<ITerminal, ClientQueue> queuesToBoxes;
+        private Dictionary<ITerminal, IClientQueue> queuesToBoxes;
 
         public Cordinator()
         {
-            queuesToBoxes = new Dictionary<ITerminal, ClientQueue>();
+            queuesToBoxes = new Dictionary<ITerminal, IClientQueue>();
         }
 
         public Cordinator(List<ITerminal> terminals) : this()
         {
             foreach (var box in terminals)
             {
-                queuesToBoxes[box] = new ClientQueue(box, 10);
+                queuesToBoxes[box] = new T();
+                queuesToBoxes[box].Init(box, 10);
                 queuesToBoxes[box].OverCrowdedEvent += SelectHighPriority;
                 box.IsDisabledEvent += reformateQueues;
             }
@@ -25,7 +26,8 @@ namespace CassApp
         {
             foreach (var box in terminals)
             {
-                queuesToBoxes[box] = new ClientQueue(box, 10);
+                queuesToBoxes[box] = new T();
+                queuesToBoxes[box].Init(box, 10);
                 queuesToBoxes[box].OverCrowdedEvent += SelectHighPriority;
                 box.IsDisabledEvent += reformateQueues;
             }
@@ -79,7 +81,7 @@ namespace CassApp
             return false;
         }
 
-        private void SelectHighPriority(ClientQueue clientQueue)
+        private void SelectHighPriority(IClientQueue clientQueue)
         {
             var clients = clientQueue.GetClients();
             clientQueue.RemoveClients();

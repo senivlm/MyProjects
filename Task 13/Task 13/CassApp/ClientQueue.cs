@@ -2,13 +2,13 @@
 
 namespace CassApp
 {
-    public class ClientQueue
+    public class ClientQueue : IClientQueue
     {
         private List<IClient> clients;
-        private ITerminal cashbox;
+        private ITerminal? cashbox;
         public int Number { get => cashbox.Number; }
         public int Amount { get => clients.Count; }
-        public event Action<ClientQueue> OverCrowdedEvent;
+        public event Action<ClientQueue>? OverCrowdedEvent;
 
         private int maxAmount = 10;
 
@@ -17,7 +17,7 @@ namespace CassApp
             clients = new List<IClient>();
         }
 
-        public ClientQueue(ITerminal cashbox, int maxAmount, params IClient[] clients) : this()
+        public void Init(ITerminal cashbox, int maxAmount, params IClient[] clients)
         {
             foreach (var client in clients)
             {
@@ -51,7 +51,7 @@ namespace CassApp
             }
         }
 
-        public void AddToQueue(List<IClient> clients)
+        public void AddToQueue(IList<IClient> clients)
         {
             foreach (var client in clients)
             {
@@ -65,7 +65,7 @@ namespace CassApp
 
         public string Dequeue(IClient client)
         {
-            var text = cashbox.ToService(client);
+            var text = cashbox?.ToService(client);
             clients.Remove(client);
             return text;
         }

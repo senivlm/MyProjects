@@ -8,39 +8,54 @@ namespace CassApp
         static void Main(string[] args)
         {
             //сгенерували клієнтів
-
-            ICollection<Client> clients = ClientGenerator.Generate(15);
-            using (var sw = new StreamWriter(@"D:\MyProjects\Task 13\Task 13\CassApp\ClientsData"))
+            try
             {
-                foreach (var client in clients)
+                ICollection<IClient> clients = ClientGenerator.Generate(15);
+                using (var sw = new StreamWriter(@"D:\MyProjects\Task 13\Task 13\CassApp\ClientsData"))
                 {
-                    sw.WriteLine(client);
+                    foreach (var client in clients)
+                    {
+                        sw.WriteLine(client);
+                    }
+                }
+
+                //прочитали їх
+                var reader = new Reader(@"D:\MyProjects\Task 13\Task 13\CassApp\ClientsData");
+                var list = reader.ReadExpresion();
+                List<IClient> listClients = new();
+                foreach (var item in list)
+                {
+                    listClients.Add(ClientParser.Parse(item));
+                }
+
+                var cashbox1 = new Cashbox(new Coordinate(1, 2), 1);
+                var cashbox2 = new Cashbox(new Coordinate(1, 5), 2);
+                var cashbox3 = new Cashbox(new Coordinate(1, 8), 3);
+                Cordinator<ClientQueue> cordinator = new(cashbox1, cashbox2, cashbox3);
+                cordinator.SimulateCoordination(listClients);
+                var servicedClients = cordinator.PerformQueue();
+                using (var sw = new StreamWriter(@"D:\MyProjects\Task 13\Task 13\CassApp\Results.txt"))
+                {
+                    int count = servicedClients.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        sw.WriteLine(servicedClients.Dequeue());
+                    }
                 }
             }
-
-            //прочитали їх
-            var reader = new Reader(@"D:\MyProjects\Task 13\Task 13\CassApp\ClientsData");
-            var list = reader.ReadExpresion();
-            List<IClient> listClients = new();
-            foreach (var item in list)
+            catch(NullReferenceException ex)
             {
-                listClients.Add(ClientParser.Parse(item));
+                Console.WriteLine(ex);
             }
-
-            var cashbox1 = new Cashbox(new Coordinate(1, 2), 1);
-            var cashbox2 = new Cashbox(new Coordinate(1, 5), 2);
-            var cashbox3 = new Cashbox(new Coordinate(1, 8), 3);
-            Cordinator cordinator = new(cashbox1, cashbox2, cashbox3);
-            cordinator.SimulateCoordination(listClients);
-            var servicedClients = cordinator.PerformQueue();
-            using (var sw = new StreamWriter(@"D:\MyProjects\Task 13\Task 13\CassApp\Results.txt"))
+            catch (FileNotFoundException ex)
             {
-                int count = servicedClients.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    sw.WriteLine(servicedClients.Dequeue());
-                }
+                Console.WriteLine(ex);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            
         }
     }
 }

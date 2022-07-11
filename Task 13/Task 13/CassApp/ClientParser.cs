@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CassApp
 {
-    internal static class ClientParser
+    public static class ClientParser
     {
         public static IClient Parse(string text)
         {
