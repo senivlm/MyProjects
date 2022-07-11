@@ -35,7 +35,7 @@ class Program
 		storage.AddItem(expiredProduct);
 		storage.AddItem(expirableProduct);
 
-		var products = storage.FindWithNameAndPredicate((x) => x.Name == "TimeToExpire");
+		var products = storage.FindWithPredicate((x) => x.Name == "TimeToExpire");
         foreach (var item in products)
         {
             Console.WriteLine(item);

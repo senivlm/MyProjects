@@ -6,14 +6,16 @@ namespace Task_11.Storage
 {
     static class StorageReaderExtenion
     {
-        public static void AddItemsFromFile(this Storage<Product> storage, string? path, LogHandler<Product> logHandler)
+        public static void AddItemsFromFile<T, G>(this T storage, string path, LogHandler<Product> logHandler)
+            where T : IStoragable, IStorage<G>
+            where G : IProduct
         {
             for (int i = 0; Path.GetFileName(path) == null && i < 3; i++)
             {
                 Console.WriteLine("Try to enter the path again");
                 path = Console.ReadLine();
             }
-            using (StreamReader? sr = new(path))
+            using (StreamReader sr = new(path))
             {
                 while (!sr.EndOfStream)
                 {
@@ -21,7 +23,7 @@ namespace Task_11.Storage
                     int price;
                     double weight;
                     bool occuredProblem = false;
-                    string?[] text = sr.ReadLine()?.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string?[] text = sr.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
                     if (text[0] != null)
                     {
                         name = char.ToUpper(text[0][0]) + text[0][1..text[0].Length];

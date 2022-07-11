@@ -124,19 +124,10 @@ namespace Task_11.Storage
             }
         }
 
-        public bool TryToFindSpecialType<Type>(out Type? obj)
+        public bool TryToFindSpecialType<Type>(out IEnumerable<T> products)
         {
-            obj = default;
-            bool isFound = false;
-            foreach (var item in _products)
-            {
-                if (item is Type someProduct)
-                {
-                    obj = someProduct;
-                    isFound = true;
-                }
-            }
-            return isFound;
+            products = _products.Where(x => x is Type);
+            return products.Count() > 0;
         }
 
         public void ChangePriceOfAllProducts(int percentage)
