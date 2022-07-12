@@ -1,5 +1,5 @@
 ﻿interface ICalculator
-{
+{// можна було розділити на 2 інтерфейси.
     public void AddBinaryOperator(string sign, Func<double, double, double> func);
     public void AddUnaryOperator(string sign, Func<double, double> func);
     public void AddValue(params double[] values);
