@@ -1,7 +1,7 @@
 ﻿using CassApp.Interfaces;
 
 namespace CassApp
-{
+{// молодець, що зробив узагальнення. Покажіть, будь ласка, у групі.
     public class Cordinator<T> where T : IClientQueue, new()
     {
         private Dictionary<ITerminal, IClientQueue> queuesToBoxes;
