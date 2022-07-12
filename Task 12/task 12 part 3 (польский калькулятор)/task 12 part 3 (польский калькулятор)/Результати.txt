@@ -1,3 +1,6 @@
+Normal notation: (5*7*457)-tg(1.5)+(1-74*sin(54-42)*0.54)
+Postfix(polish) notation: 5 7 * 457 * 1.5 tg - 1 74 54 42 - sin * 0.54 * - + 
+Result: 16003.340033856126
 Normal notation: -15/cos(2)
 Postfix(polish) notation: -15 2 cos / 
 Result: 36.04496942583571
@@ -7,6 +10,3 @@ Result: -433.56000750339956
 Normal notation: (-54+45)*sin(5)-(4+-5)
 Postfix(polish) notation: -54 45 + 5 sin * 4 -5 + - 
 Result: 9.630318471968247
-Normal notation: (5*7*457)-tg(1.5)+(1-74*sin((54-42)*0.54)
-Postfix(polish) notation: 5 7 * 457 * 1.5 tg - 1 74 54 42 - 0.54 * sin * - 
-Result: -13.470442117440275
