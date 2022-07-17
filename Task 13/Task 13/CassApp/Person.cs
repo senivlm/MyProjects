@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace CassApp
 {
-    public abstract class Person
+    public interface Person
     {
-        protected string name;
-        protected int age;
-
-        public Person(string name, int age)
-        {
-            this.name = name;
-            this.age = age;
-        }
+        public string Name { get; }
+        public int Age { get; }
     }
 }

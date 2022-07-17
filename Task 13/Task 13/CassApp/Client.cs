@@ -10,8 +10,15 @@ namespace CassApp
         public Coordinate Coordinate { get; }
         public Status? Status { get; }
 
-        public Client(string name, int age, Guid id, int timeService, Coordinate coordinate, Status? status) : base(name, age)
+        private string name;
+        public string Name => name;
+        private int age;
+        public int Age => age;
+
+        public Client(string name, int age, Guid id, int timeService, Coordinate coordinate, Status? status)
         {
+            this.name = name;
+            this.age = age;
             Id = id;
             TimeService = timeService;
             Coordinate = coordinate;
@@ -20,7 +27,7 @@ namespace CassApp
 
         public override string ToString()
         {
-            return $"{name} {age} {Id} {TimeService} {Coordinate} {Status}";
+            return $"{Name} {Age} {Id} {TimeService} {Coordinate} {Status}";
         }
     }
 }
