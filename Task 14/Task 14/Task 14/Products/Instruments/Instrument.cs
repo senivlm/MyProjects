@@ -24,6 +24,11 @@ namespace Task_14.Products.Instruments
             Price = (int)(Price * (percentage / 100f));
         }
 
+        public override string ToString()
+        {
+            return String.Format($"{Name}, {Color} color, {Weight} Kg, {Price} UAH");
+        }
+
         public abstract IInstrument Clone();
     }
 }
