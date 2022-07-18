@@ -12,10 +12,7 @@ namespace Task_14.Shops_Fabrics_.Pizzeria
         {
             pizzesMenu = new();
             var temp = XmlSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
-            foreach (var item in temp)
-            {
-                pizzesMenu[item.Type] = item;
-            }
+            pizzesMenu = temp.Select(ipizza => (IPizza)ipizza).ToDictionary(x => x.Type);
         }
 
         public void AddPizza(IPizza pizza) => pizzesMenu[pizza.Type] = (IPizza)((Pizza)pizza).Clone();
