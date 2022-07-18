@@ -6,5 +6,7 @@ namespace Task_14.Products.Interfaces
     {
         public Colors Color { get; }
         public double Weight { get; }
+
+        IInstrument Clone();
     }
 }

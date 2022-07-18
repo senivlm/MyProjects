@@ -13,8 +13,8 @@ class Program
         var storage = Storage<IFood>.GetInstance();
         storage.AddItem(new OtherFood("apple", 50, 2), 1);
         storage.AddItem(new OtherFood("banana", 60, 1), 1);
-        DataSerializator.XmlSerialize<Storage<IFood>>(storage, @"D:\MyProjects\Task 14(Не доробив)\Task 14\Task 14\Storage.xml");
-        storage = DataSerializator.XmlDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14(Не доробив)\Task 14\Task 14\Storage.xml");
+        DataSerializator.XmlSerialize<Storage<IFood>>(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
+        storage = DataSerializator.XmlDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
         foreach (var item in storage)
         {
             Console.WriteLine(item);

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task_14.Enums;
+﻿using Task_14.Enums;
+using Task_14.Products.Interfaces;
 
 namespace Task_14.Products.Instruments
 {

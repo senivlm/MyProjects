@@ -3,7 +3,7 @@ using Task_14.Products.Interfaces;
 
 namespace Task_14.Products.Instruments
 {
-    public class IronShovel : Instrument
+    public class IronShovel : Shovel
     {
         public IronShovel(string name, double weight, int price) : base(name, weight, price, Colors.White)
         {
