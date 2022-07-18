@@ -15,16 +15,16 @@ class Program
         var storage = Storage<IFood>.GetInstance();
         storage.AddItem(new OtherFood("apple", 50, 2), 1);
         storage.AddItem(new OtherFood("banana", 60, 1), 1);
-        DataSerializator.XmlSerialize<Storage<IFood>>(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
-        storage = DataSerializator.XmlDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
+        XmlSerializator.XmlSerialize<Storage<IFood>>(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
+        storage = XmlSerializator.XmlDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\Storage.xml");
         foreach (var item in storage)
         {
             Console.WriteLine(item);
         }
 
         //бінарна серіалізація
-        DataSerializator.BinarySerialize(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
-        storage = DataSerializator.BinaryDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
+        BinarySerializator.BinarySerialize(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
+        storage = BinarySerializator.BinaryDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
         foreach (var item in storage)
         {
             Console.WriteLine(item);
@@ -63,7 +63,7 @@ class Program
             new OtherFood("Бекон", 20, 0.1d),
             new OtherFood("Криветки", 40, 0.15d))
             );
-        DataSerializator.XmlSerialize<List<Pizza>>(pizzas1, a);
-        DataSerializator.XmlSerialize<List<Pizza>>(pizzas2, b);
+        XmlSerializator.XmlSerialize<List<Pizza>>(pizzas1, a);
+        XmlSerializator.XmlSerialize<List<Pizza>>(pizzas2, b);
     }
 }

@@ -10,7 +10,7 @@ namespace Task_14.Shops_Fabrics_.Pizzeria
         public ItalianPizzeria(string Xmlpath = @"D:\MyProjects\Task 14\Task 14\Task 14\PizzaRecepies1.xml")
         {
             pizzesMenu = new();
-            var temp = DataSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
+            var temp = XmlSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
             foreach (var item in temp)
             {
                 pizzesMenu[item.Type] = item;
