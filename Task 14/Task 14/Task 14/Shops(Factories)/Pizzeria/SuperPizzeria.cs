@@ -1,21 +1,21 @@
 ﻿using Task_14.Enums;
 using Task_14.Products.Foods;
+using Task_14.Products.Foods.SubclassesOfPizza;
 using Task_14.Products.Interfaces;
 
 namespace Task_14.Shops_Fabrics_.Pizzeria
 {
     public class SuperPizzeria : Pizzeria
     {
-        private Dictionary<PizzaTypes, IPizza> pizzesMenu;
+        private Dictionary<PizzaTypes, NYPizza> pizzesMenu;
 
         public SuperPizzeria(string Xmlpath = @"D:\MyProjects\Task 14\Task 14\Task 14\PizzaRecepies2.xml")
         {
-            pizzesMenu = new();
-            var temp = XmlSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
-            pizzesMenu = temp.Select(ipizza => (IPizza)ipizza).ToDictionary(x => x.Type);
+            var tempMenu = XmlSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
+            pizzesMenu = tempMenu.Select(ipizza => (NYPizza)ipizza).ToDictionary(x => x.Type);
         }
 
-        public void AddPizza(IPizza pizza) => pizzesMenu[pizza.Type] = (IPizza)((Pizza)pizza).Clone();
+        public void AddPizza(NYPizza pizza) => pizzesMenu[pizza.Type] = (NYPizza)pizza.Clone();
 
         public override IFood GetDrink()
         {
@@ -24,7 +24,7 @@ namespace Task_14.Shops_Fabrics_.Pizzeria
 
         public override IPizza GetPizza(PizzaTypes pizzaType)
         {
-            throw new NotImplementedException();
+            return pizzesMenu[pizzaType];
         }
     }
 }

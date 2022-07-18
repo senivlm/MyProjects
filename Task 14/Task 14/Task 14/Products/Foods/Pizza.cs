@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Task_14.Enums;
+using Task_14.Products.Foods.SubclassesOfPizza;
 using Task_14.Products.Interfaces;
 
 namespace Task_14.Products.Foods
@@ -8,6 +9,8 @@ namespace Task_14.Products.Foods
     [KnownType(typeof(Food))]
     [KnownType(typeof(OtherFood))]
     [KnownType(typeof(Meat))]
+    [KnownType(typeof(ItalianPizza))]
+    [KnownType(typeof(NYPizza))]
     [Serializable]
     [DataContract]
     public class Pizza : Food, IPizza
