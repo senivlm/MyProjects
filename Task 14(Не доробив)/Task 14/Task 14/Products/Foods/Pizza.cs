@@ -50,7 +50,12 @@ namespace Task_14.Products.Foods
             this.ingridients = new List<Food>(ingridients);
         }
 
-        public override Food Clone()
+        public override string ToString()
+        {
+            return String.Format($"{Name}, {Weight} Kg, {Price} UAH");
+        }
+
+        public override IPizza Clone()
         {
             return new Pizza(name, price, weight, Type, TimeToExpire, ingridients);
         }

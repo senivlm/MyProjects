@@ -2,7 +2,7 @@
 
 namespace Task_14.Products.Interfaces
 {
-    public interface IMeat : IFood, IExpirable
+    public interface IMeat : IFood, IExpirable, ICloneable<IFood>
     {
         public Category MeatCategory { get; }
         public Species MeatSpecies { get; }

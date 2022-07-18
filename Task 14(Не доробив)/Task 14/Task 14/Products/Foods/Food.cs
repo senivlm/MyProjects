@@ -4,7 +4,7 @@ using Task_14.Products.Interfaces;
 namespace Task_14.Products.Foods
 {
     [Serializable]
-    public abstract class Food : IFood, ICloneable<Food>
+    public abstract class Food : IFood
     {
         protected string name;
         public string Name
@@ -66,7 +66,7 @@ namespace Task_14.Products.Foods
         {
         }
 
-        public abstract Food Clone();
+        public abstract IFood Clone();
 
         public override string ToString()
         {

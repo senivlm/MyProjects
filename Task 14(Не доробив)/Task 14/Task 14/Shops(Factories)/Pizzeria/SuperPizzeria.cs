@@ -4,10 +4,11 @@ using Task_14.Products.Interfaces;
 
 namespace Task_14.Shops_Fabrics_.Pizzeria
 {
-    public class ItalianPizzeria : Pizzeria
+    public class SuperPizzeria : Pizzeria
     {
         private Dictionary<PizzaTypes, IPizza> pizzesMenu;
-        public ItalianPizzeria(string Xmlpath = @"D:\MyProjects\Task 14\Task 14\Task 14\PizzaRecepies1.xml")
+
+        public SuperPizzeria(string Xmlpath = @"D:\MyProjects\Task 14\Task 14\Task 14\PizzaRecepies2.xml")
         {
             pizzesMenu = new();
             var temp = DataSerializator.XmlDeserialize<List<Pizza>>(Xmlpath);
@@ -21,12 +22,12 @@ namespace Task_14.Shops_Fabrics_.Pizzeria
 
         public override IFood GetDrink()
         {
-            return new OtherFood("CocaCola", 20, 0.6);
+            return new OtherFood("Juice", 15, 0.9);
         }
 
         public override IPizza GetPizza(PizzaTypes pizzaType)
         {
-            return pizzesMenu[pizzaType];
+            throw new NotImplementedException();
         }
     }
 }
