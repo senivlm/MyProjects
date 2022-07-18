@@ -12,7 +12,7 @@ static class DataSerializator
 			return;
         }
 		BinaryFormatter bf = new();
-		using(FileStream fs = File.OpenRead(filePath))
+		using(Stream fs = File.OpenWrite(filePath))
         {
 			bf.Serialize(fs, data);
         }

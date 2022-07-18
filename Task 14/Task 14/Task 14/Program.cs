@@ -19,6 +19,13 @@ class Program
         {
             Console.WriteLine(item);
         }
+
+        DataSerializator.BinarySerialize(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
+        storage = DataSerializator.BinaryDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
+        foreach (var item in storage)
+        {
+            Console.WriteLine(item);
+        }
     }
     //Серіалізував дані для піцерії, щоб не було хардкоду.
     //Тобто піцерія буде брати меню з посторонього файлу
