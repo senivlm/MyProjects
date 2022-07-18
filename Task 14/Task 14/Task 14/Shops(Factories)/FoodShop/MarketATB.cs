@@ -1,5 +1,6 @@
 ﻿using Task_11.Enums;
 using Task_14.Products.Foods;
+using Task_14.Products.Foods.MilkSubclasses;
 using Task_14.Products.Interfaces;
 
 namespace Task_14.Shops_Fabrics_.FoodShop
@@ -23,7 +24,7 @@ namespace Task_14.Shops_Fabrics_.FoodShop
 
         public override IMilk GetMilk()
         {
-            return new Milk("Milky", 40, 1, new DateTime(2022, 12, 5));
+            return new Cheese("Milky", 40, 1, new DateTime(2022, 12, 5));
         }
     }
 }

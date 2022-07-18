@@ -7,8 +7,6 @@ using Task_14.Products.Interfaces;
 namespace Task_11.Storage
 {
     [Serializable]
-    [KnownType(typeof(Food))]
-    [KnownType(typeof(OtherFood))]
     [KnownType(typeof(Dictionary<Food, int>))]
     [KnownType(typeof(KeyValuePair<Food, int>))]
     [DataContract]

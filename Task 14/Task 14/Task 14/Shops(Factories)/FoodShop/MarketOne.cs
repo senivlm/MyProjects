@@ -1,5 +1,7 @@
 ﻿using Task_11.Enums;
 using Task_14.Products.Foods;
+using Task_14.Products.Foods.MeatSubclasses;
+using Task_14.Products.Foods.MilkSubclasses;
 using Task_14.Products.Interfaces;
 
 namespace Task_14.Shops_Fabrics_.FoodShop
@@ -18,12 +20,12 @@ namespace Task_14.Shops_Fabrics_.FoodShop
 
         public override IMeat GetMeat()
         {
-            return new Meat("Mutton", 85, 0.9, new DateTime(2022, 12, 5), Category.Sort2, Species.mutton);
+            return new Salami("MuttonSalami", 85, 0.9, new DateTime(2022, 12, 5), Category.Sort2, Species.mutton);
         }
 
         public override IMilk GetMilk()
         {
-            return new Milk("Milk", 35, 1, new DateTime(2022, 12, 5));
+            return new Yogurt("Yougurt", 35, 1, 30, new DateTime(2022, 12, 5));
         }
     }
 }
