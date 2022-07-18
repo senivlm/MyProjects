@@ -10,6 +10,8 @@ class Program
 	static void Main(string[] args)
 	{
         //cеріалізація\десереалізація складу
+
+        //xml cеріалізація
         var storage = Storage<IFood>.GetInstance();
         storage.AddItem(new OtherFood("apple", 50, 2), 1);
         storage.AddItem(new OtherFood("banana", 60, 1), 1);
@@ -20,6 +22,7 @@ class Program
             Console.WriteLine(item);
         }
 
+        //бінарна серіалізація
         DataSerializator.BinarySerialize(storage, @"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
         storage = DataSerializator.BinaryDeserialize<Storage<IFood>>(@"D:\MyProjects\Task 14\Task 14\Task 14\BinaryStorage.txt");
         foreach (var item in storage)
