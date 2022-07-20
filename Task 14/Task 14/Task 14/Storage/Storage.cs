@@ -9,6 +9,9 @@ namespace Task_11.Storage
     [Serializable]
     [KnownType(typeof(Dictionary<Food, int>))]
     [KnownType(typeof(KeyValuePair<Food, int>))]
+    [KnownType(typeof(OtherFood))]
+    [KnownType(typeof(Meat))]
+    [KnownType(typeof(Milk))]
     [DataContract]
     public class Storage<T> : IStorage<T>, IStoragable
         where T : IProduct, ICloneable<T>

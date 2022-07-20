@@ -1,10 +1,15 @@
 ﻿using Task_14.Enums;
+using Task_14.Factories.PatternStratehy;
 using Task_14.Products.Instruments;
 
 namespace Task_14.Shops_Fabrics_.InstrumentShop
 {
     public class IronFactory : InstrumentFactory
     {
+        public IronFactory(IDialogueStrategy dialogue) : base(dialogue)
+        {
+        }
+
         public override Hammer GetHammer(Colors color)
         {
             return new Hammer("HammerM", 2, 190, color);

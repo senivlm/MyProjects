@@ -1,4 +1,6 @@
-﻿using Task_11.Enums;
+﻿using System.Reflection;
+using Task_11.Enums;
+using Task_14.Factories.PatternStratehy;
 using Task_14.Products.Foods;
 using Task_14.Products.Foods.MilkSubclasses;
 using Task_14.Products.Interfaces;
@@ -7,6 +9,10 @@ namespace Task_14.Shops_Fabrics_.FoodShop
 {
     public class MarketATB : MarketFactory
     {
+        public MarketATB(IDialogueStrategy dialogue) : base(dialogue)
+        {
+        }
+
         public override IFood GetChips()
         {
             return new OtherFood("ChipsLays", 40, 0.7);
@@ -28,3 +34,4 @@ namespace Task_14.Shops_Fabrics_.FoodShop
         }
     }
 }
+

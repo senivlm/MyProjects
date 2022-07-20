@@ -1,4 +1,5 @@
 ﻿using Task_11.Enums;
+using Task_14.Factories.PatternStratehy;
 using Task_14.Products.Foods;
 using Task_14.Products.Foods.MeatSubclasses;
 using Task_14.Products.Foods.MilkSubclasses;
@@ -8,6 +9,10 @@ namespace Task_14.Shops_Fabrics_.FoodShop
 {
     public class MarketOne : MarketFactory
     {
+        public MarketOne(IDialogueStrategy dialogue) : base(dialogue)
+        {
+        }
+
         public override IFood GetChips()
         {
             return new OtherFood("Crisps", 25, 0.6);

@@ -5,6 +5,8 @@ using Task_14.Enums;
 using Task_14.Shops_Fabrics_.InstrumentShop;
 using Task_14.Products.Instruments;
 using Task_14.Products.Foods.SubclassesOfPizza;
+using Task_14.Shops_Fabrics_.FoodShop;
+using Task_14.Factories.PatternStratehy;
 
 class Program
 {
@@ -33,10 +35,14 @@ class Program
         //---------------------------------
         //використання патерну стратегія
         //узагальнена абстрактна фабрика приймає конкретну фабрику
-        InstrumentFactory factory = new IronFactory();
+        InstrumentFactory factory = new IronFactory(new ConsoleDialogue());
         //змінна з узагальненим типом абстрактного класу інструменту приймає конкретний інстурмент
         Shovel instrument = factory.GetShovel();
         Console.WriteLine(instrument);
+
+        //скористався патерном стратегія для вибору взаємодії між користувачем
+        MarketFactory mf = new MarketATB(new ConsoleDialogue());
+        mf.StartPurchasing();
     }
 
     //Серіалізував дані для піцерії, щоб не було хардкоду.
