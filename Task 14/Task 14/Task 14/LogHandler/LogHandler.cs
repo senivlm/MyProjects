@@ -6,15 +6,23 @@ namespace Task_11.LogHandler
 {
     public class LogHandler<T>
     {
+        private static Lazy<LogHandler<T>> instance = new(() => new LogHandler<T>());
+
         private List<string> errors = new List<string>();
         private Dictionary<int, T> objectsInLogs = new Dictionary<int, T>();
 
         private string path;
         private int indexObject = 0;
 
-        public LogHandler(string path)
+        private LogHandler()
         {
-            this.path = path;
+            
+        }
+
+        public void ChangePath(string path)
+        {
+            if(path != null)
+                this.path = path;
         }
 
         public T GetLogObject(int index)

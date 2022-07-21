@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Task_14.Enums;
 
 namespace Task_14.Factories.PatternStratehy
 {
@@ -42,7 +43,17 @@ namespace Task_14.Factories.PatternStratehy
                         Console.WriteLine("exit");
                         return;
                     }
-                    var prod = methods[variant].Invoke(obj, default);
+                    object? prod = null;
+                    if (methods[variant].GetParameters().Length == 0)
+                    {
+                        prod = methods[variant].Invoke(obj, default);
+                    }
+                    else
+                    {
+                        string? output = Console.ReadLine();
+                        object en = Enum.Parse(methods[variant].GetParameters()[0].ParameterType, output);
+                        prod = methods[variant].Invoke(obj, new[] { en });
+                    }
                     Console.WriteLine(prod);
                 }
             }

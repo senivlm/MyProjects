@@ -44,6 +44,9 @@ class Program
         //скористався патерном стратегія для вибору взаємодії між користувачем
         Shop shop = new MarketATB(new ConsoleDialogue());
         shop.StartPurchasing();
+
+        Shop shop1 = new PlasticFactory(new ConsoleDialogue());
+        shop1.StartPurchasing();
     }
 
     //Серіалізував дані для піцерії, щоб не було хардкоду.
