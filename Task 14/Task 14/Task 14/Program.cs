@@ -7,6 +7,7 @@ using Task_14.Products.Instruments;
 using Task_14.Products.Foods.SubclassesOfPizza;
 using Task_14.Shops_Fabrics_.FoodShop;
 using Task_14.Factories.PatternStratehy;
+using Task_14.Factories;
 
 class Program
 {
@@ -41,8 +42,8 @@ class Program
         Console.WriteLine(instrument);
 
         //скористався патерном стратегія для вибору взаємодії між користувачем
-        MarketFactory mf = new MarketATB(new ConsoleDialogue());
-        mf.StartPurchasing();
+        Shop shop = new MarketATB(new ConsoleDialogue());
+        shop.StartPurchasing();
     }
 
     //Серіалізував дані для піцерії, щоб не було хардкоду.
