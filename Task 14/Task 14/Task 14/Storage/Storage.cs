@@ -67,13 +67,7 @@ namespace Task_11.Storage
         //пошук по предикату
         public IEnumerable<KeyValuePair<T, int>> Select(Func<KeyValuePair<T, int>, bool> predicate)
         {
-            foreach (var item in this)
-            {
-                if (predicate(item))
-                {
-                    yield return item;
-                }
-            }
+            return _products.Where(x => predicate(x));
         }
 
         //універсальний пошук по предикату 
@@ -104,6 +98,7 @@ namespace Task_11.Storage
             }
             return list;
         }
+
         public void AddItem(object item, int quantity)
         {
             if (item == null)
@@ -118,6 +113,7 @@ namespace Task_11.Storage
                 ProductIsExpiredEvent?.Invoke((T)item);
             }
         }
+
         public void AddItem(object item)
         {
             if (item == null)
