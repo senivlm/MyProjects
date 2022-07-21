@@ -34,13 +34,14 @@ class Program
             Console.WriteLine(item);
         }
         //---------------------------------
-        //використання патерну стратегія
+        //використання патерну абстрактна фабрика
         //узагальнена абстрактна фабрика приймає конкретну фабрику
         InstrumentFactory factory = new IronFactory(new ConsoleDialogue());
         //змінна з узагальненим типом абстрактного класу інструменту приймає конкретний інстурмент
         Shovel instrument = factory.GetShovel();
         Console.WriteLine(instrument);
 
+        //---------------------------------
         //скористався патерном стратегія для вибору взаємодії між користувачем
         Shop shop = new MarketATB(new ConsoleDialogue());
         shop.StartPurchasing();
